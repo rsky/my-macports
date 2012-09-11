@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-meld3
 version             0.6.8
-categories-append   textproc
+categories-append   textproc www
 license             ZPL
 maintainers         openmaintainer
 supported_archs     noarch

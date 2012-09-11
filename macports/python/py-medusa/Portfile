@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-medusa
 version             0.5.4
-categories-append   net
+categories-append   net devel
 license             MIT
 maintainers         openmaintainer
 supported_archs     noarch
