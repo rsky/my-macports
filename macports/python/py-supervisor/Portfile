@@ -54,3 +54,9 @@ variant doc description {Install documentation} {
         file copy ${worksrcpath}/docs ${docdestroot}
     }
 }
+
+variant no_suffix description {No Python version suffix for commands} {
+    python.link_binaries_suffix
+}
+
+default_variants    +no_suffix
