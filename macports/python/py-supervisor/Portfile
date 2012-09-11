@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-supervisor
+version             3.0b1
+categories-append   sysutils
+license             ZPL
+maintainers         openmaintainer
+supported_archs     noarch
+
+description         Process manager for UNIX-like OSs
+long_description \
+   The supervisor is a client/server system that allows its users \
+   to control a number of processes on UNIX-like operating systems
+
+homepage            http://pypi.python.org/pypi/supervisor/
+master_sites        http://pypi.python.org/packages/source/s/supervisor/
+distname            supervisor-${version}
+
+checksums           md5    5a2f1bb052bb2bbfd6d69ba8b1e1dad7 \
+                    rmd160 79ba6f3ee033b583f003443288d95e6e4d62b04d \
+                    sha256 7361e224871257534cac3bc035e90571c35b9fa9245ec46207de9d89191a7d0c
+
+python.versions 24 25 26 27
+python.default_version 27
+
+if {$subport != $name} {
+    depends_build-append    port:py${python.version}-distribute
+    depends_lib-append      port:py${python.version}-meld3 \
+                            port:py${python.version}-medusa 
+
+    if {${python.version} == 24} {
+        depends_lib-append  port:py24-elementtree
+    }
+}
+
+set docdestroot ${destroot}${prefix}/share/doc/${subport}
+
+post-destroot {
+    xinstall -d ${docdestroot}
+    foreach f [glob ${worksrcpath}/*.txt] {
+        file copy ${f} ${docdestroot}
+    }
+    foreach f [glob ${worksrcpath}/*.rst] {
+        file copy ${f} ${docdestroot}
+    }
+}
+
+variant doc description {Install documentation} {
+    post-destroot {
+        file copy ${worksrcpath}/docs ${docdestroot}
+    }
+}
