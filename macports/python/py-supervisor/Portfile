@@ -60,3 +60,7 @@ variant no_suffix description {No Python version suffix for commands} {
 }
 
 default_variants    +no_suffix
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}
