@@ -30,7 +30,7 @@ python.default_version 27
 if {$subport != $name} {
     depends_build-append    port:py${python.version}-distribute
     depends_lib-append      port:py${python.version}-meld3 \
-                            port:py${python.version}-medusa 
+                            port:py${python.version}-medusa
 
     if {${python.version} == 24} {
         depends_lib-append  port:py24-elementtree
@@ -55,7 +55,7 @@ variant doc description {Install documentation} {
     }
 }
 
-variant no_suffix description {No Python version suffix for commands} {
+variant no_suffix description {Don't add the Python version suffix for the executables} {
     python.link_binaries_suffix
 }
 
