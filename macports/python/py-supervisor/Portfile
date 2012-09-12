@@ -35,6 +35,10 @@ if {$subport != $name} {
     if {${python.version} == 24} {
         depends_lib-append  port:py24-elementtree
     }
+
+    if {${python.version} == ${python.default_version}} {
+        default_variants    +no_suffix
+    }
 }
 
 set docdestroot ${destroot}${prefix}/share/doc/${subport}
@@ -58,8 +62,6 @@ variant doc description {Install documentation} {
 variant no_suffix description {Don't add the Python version suffix for the executables} {
     python.link_binaries_suffix
 }
-
-default_variants    +no_suffix
 
 livecheck.type  regex
 livecheck.url   ${homepage}
