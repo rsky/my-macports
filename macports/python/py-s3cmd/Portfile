@@ -44,6 +44,11 @@ if {$subport != $name} {
     }
 }
 
+post-destroot {
+    set python_prefix ${frameworks_dir}/Python.framework/Versions/${python.branch}
+    file attributes ${destroot}${python_prefix}/share/man/man1/s3cmd.1 -permissions 0644
+}
+
 variant no_suffix description {Don't add the Python version suffix for the executables} {
     python.link_binaries_suffix
 }
