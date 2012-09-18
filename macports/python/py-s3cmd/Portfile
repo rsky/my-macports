@@ -21,8 +21,7 @@ long_description \
 
 homepage            http://s3tools.org/s3cmd \
                     http://pypi.python.org/pypi/s3cmd/
-master_sites        sourceforge:s3tools \
-                    http://pypi.python.org/packages/source/s/s3cmd/
+master_sites        http://pypi.python.org/packages/source/s/s3cmd/
 distname            s3cmd-${version}
 
 checksums \
