@@ -19,9 +19,10 @@ homepage            http://pypi.python.org/pypi/medusa/
 master_sites        http://pypi.python.org/packages/source/m/medusa/
 distname            medusa-${version}
 
-checksums           md5    5d10505036bc38f8d4cb51d87516e069 \
-                    rmd160 84da6140aaf3e677e86014a4e87c83ada39776ec \
-                    sha256 ab7fc4c9afd28b3aaf575aca5bb07005d228a0cad5b1787a521ffca63cfe4317
+checksums \
+    md5    5d10505036bc38f8d4cb51d87516e069 \
+    rmd160 84da6140aaf3e677e86014a4e87c83ada39776ec \
+    sha256 ab7fc4c9afd28b3aaf575aca5bb07005d228a0cad5b1787a521ffca63cfe4317
 
 patchfiles          patch-ez_setup.py \
                     patch-setup.py
@@ -34,5 +35,5 @@ if {$subport != $name} {
 }
 
 livecheck.type  regex
-livecheck.url   ${homepage}
+livecheck.url   http://pypi.python.org/pypi/medusa/
 livecheck.regex {medusa(?: |&nbsp;)([0-9.]+(?:-[a-z]+[0-9]+)?)}

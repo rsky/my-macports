@@ -16,13 +16,15 @@ long_description \
    The supervisor is a client/server system that allows its users \
    to control a number of processes on UNIX-like operating systems
 
-homepage            http://pypi.python.org/pypi/supervisor/
+homepage            http://supervisord.org/ \
+                    http://pypi.python.org/pypi/supervisor/
 master_sites        http://pypi.python.org/packages/source/s/supervisor/
 distname            supervisor-${version}
 
-checksums           md5    5a2f1bb052bb2bbfd6d69ba8b1e1dad7 \
-                    rmd160 79ba6f3ee033b583f003443288d95e6e4d62b04d \
-                    sha256 7361e224871257534cac3bc035e90571c35b9fa9245ec46207de9d89191a7d0c
+checksums \
+    md5    5a2f1bb052bb2bbfd6d69ba8b1e1dad7 \
+    rmd160 79ba6f3ee033b583f003443288d95e6e4d62b04d \
+    sha256 7361e224871257534cac3bc035e90571c35b9fa9245ec46207de9d89191a7d0c
 
 python.versions 24 25 26 27
 python.default_version 27
@@ -64,5 +66,5 @@ variant no_suffix description {Don't add the Python version suffix for the execu
 }
 
 livecheck.type  regex
-livecheck.url   ${homepage}
+livecheck.url   http://pypi.python.org/pypi/supervisor/
 livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}
