@@ -51,7 +51,8 @@ destroot {
 
 post-install {
     ui_msg "\nTo create a database instance, after install do\n\
-        sudo -u ${pguser}:${pggroup} mkdir ${defaultdb}\n\
+        sudo mkdir -p -m 0700 ${defaultdb}\n\
+        sudo chown ${pguser}:${pggroup} ${defaultdb}\n\
         sudo -u ${pguser} ${libdir}/bin/initdb -D ${defaultdb}\'"
     ui_msg "\nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
         by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
