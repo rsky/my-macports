@@ -1,0 +1,65 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem 1.0
+
+name            postgresql92-server
+version         1.0
+categories      databases
+platforms       darwin
+maintainers     mww jwa openmaintainer
+license         Permissive
+description     run postgresql92 as server
+long_description \
+    ${description} (without creating any user)
+
+homepage        http://www.postgresql.org/
+master_sites    postgresql
+
+depends_run     port:postgresql92
+
+fetch {}
+checksum  {}
+extract {}
+use_configure no
+build  {}
+
+set libdir      ${prefix}/lib/postgresql92
+set dbdir       ${prefix}/var/db/postgresql92
+set defaultdb   ${prefix}/var/db/postgresql92/defaultdb
+set logdir      ${prefix}/var/log/postgresql92
+set pguser      _postgres
+set pggroup     _postgres
+
+startupitem.create  yes
+startupitem.init  \
+    "PGCTL=${libdir}/bin/pg_ctl"
+startupitem.start   \
+    "sudo -u ${pguser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} start -l ${logdir}/postgres.log"
+startupitem.stop    \
+    "sudo -u ${pguser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} stop -s -m fast"
+
+destroot {
+    xinstall -m 755 -o ${pguser} -g ${pggroup} -d \
+        ${destroot}${dbdir} \
+        ${destroot}${logdir}
+
+    destroot.keepdirs-append \
+        ${destroot}${dbdir} \
+        ${destroot}${logdir}
+}
+
+post-install {
+    ui_msg "\nTo create a database instance, after install do\n\
+        sudo -u ${pguser}:${pggroup} mkdir ${defaultdb}\n\
+        sudo -u ${pguser} ${libdir}/bin/initdb -D ${defaultdb}\'"
+    ui_msg "\nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
+        by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex (9\\.2\\.\[0-9\]+)
+#livecheck.url  ${homepage}/developer/beta
+#livecheck.url  ${homepage}/ftp/source/
+#livecheck.regex    (9\\.2\[.0-9\]+\[a-z\]+\[0-9\])
