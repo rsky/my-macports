@@ -25,35 +25,35 @@ use_configure no
 build  {}
 
 set libdir      ${prefix}/lib/postgresql92
-set dbdir       ${prefix}/var/db/postgresql92
-set defaultdb   ${prefix}/var/db/postgresql92/defaultdb
+set dbprefix    ${prefix}/var/db/postgresql92
+set dbdir       ${dbprefix}/defaultdb
 set logdir      ${prefix}/var/log/postgresql92
-set pguser      _postgres
-set pggroup     _postgres
+set dbuser      _postgres
+set dbgrp       _postgres
 
 startupitem.create  yes
 startupitem.init  \
     "PGCTL=${libdir}/bin/pg_ctl"
 startupitem.start   \
-    "sudo -u ${pguser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} start -l ${logdir}/postgres.log"
+    "sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} start -l ${logdir}/postgres.log"
 startupitem.stop    \
-    "sudo -u ${pguser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} stop -s -m fast"
+    "sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} stop -s -m fast"
 
 destroot {
-    xinstall -m 755 -o ${pguser} -g ${pggroup} -d \
-        ${destroot}${dbdir} \
+    xinstall -m 755 -o ${dbuser} -g ${dbgrp} -d \
+        ${destroot}${dbprefix} \
         ${destroot}${logdir}
 
     destroot.keepdirs-append \
-        ${destroot}${dbdir} \
+        ${destroot}${dbprefix} \
         ${destroot}${logdir}
 }
 
 post-install {
     ui_msg "\nTo create a database instance, after install do\n\
-        sudo mkdir -p -m 0700 ${defaultdb}\n\
-        sudo chown ${pguser}:${pggroup} ${defaultdb}\n\
-        sudo -u ${pguser} ${libdir}/bin/initdb -D ${defaultdb}\'"
+        sudo mkdir -p -m 0700 ${dbdir}\n\
+        sudo chown ${dbuser}:${dbgrp} ${dbdir}\n\
+        sudo -u ${dbuser} ${libdir}/bin/initdb -D ${dbdir}\'"
     ui_msg "\nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
         by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
 }
