@@ -1,3 +1,5 @@
+leveldb 414
+variants universal portdir databases/leveldb description {A fast and lightweight key/value database library by Google.} homepage http://code.google.com/p/leveldb/ epoch 0 platforms darwin name leveldb long_description {LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.} license BSD maintainers openmaintainer version 1.5.0 revision 0
 postgresql92-server 371
 portdir databases/postgresql92-server description {run postgresql92 as server} homepage http://www.postgresql.org/ epoch 0 depends_run port:postgresql92 platforms darwin name postgresql92-server license Permissive maintainers {mww jwa openmaintainer} long_description {{run postgresql92 as server} (without creating any user)} categories databases version 1.0 revision 0
 py-medusa 426
