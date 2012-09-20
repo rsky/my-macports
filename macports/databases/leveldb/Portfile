@@ -1,0 +1,76 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+
+name                leveldb
+version             1.5.0
+license             BSD
+maintainers         openmaintainer
+platforms           darwin
+
+description         A fast and lightweight key/value database library by Google.
+long_description \
+   LevelDB is a fast key-value storage library written at Google \
+   that provides an ordered mapping from string keys to string values.
+
+homepage            http://code.google.com/p/leveldb/
+master_sites        googlecode
+
+checksums \
+    md5     6797e19a0a9f9bb1c1ba356bf89227f0 \
+    rmd160  1a2e0b8622d9a5de8d7f949bc380d877b785adc1 \
+    sha256  cb73489af84d9d97d3e7d234a2f5e3a0c89ffadb657e7dd9e9047227778e57ba
+
+set major_version [lindex [split ${version} .] 0]
+set minor_version [lindex [split ${version} .] 1]
+
+configure {
+    system "cd ${worksrcpath} && ./build_detect_platform build_config.mk"
+}
+
+test.run        yes
+test.target     check
+
+destroot {
+    # install headers
+    set incdestroot ${destroot}${prefix}/include/leveldb
+    xinstall -m 0755 -d ${incdestroot}
+    eval xinstall -m 0644 \
+        [glob ${worksrcpath}/include/leveldb/*.h] \
+        ${incdestroot}
+
+    #install libraries
+    set libdestroot ${destroot}${prefix}/lib
+    xinstall -m 0755 -d ${libdestroot}
+    xinstall -m 0644 \
+        ${worksrcpath}/libleveldb.a \
+        ${libdestroot}
+    xinstall -m 0755 \
+        ${worksrcpath}/libleveldb.dylib.${major_version}.${minor_version} \
+        ${libdestroot}/libleveldb.${major_version}.${minor_version}.dylib
+    system "cd ${libdestroot} && ln -f -s \
+        libleveldb.${major_version}.${minor_version}.dylib \
+        libleveldb.${major_version}.dylib"
+    system "cd ${libdestroot} && ln -f -s \
+        libleveldb.${major_version}.${minor_version}.dylib \
+        libleveldb.dylib"
+    system "install_name_tool \
+        -id ${prefix}/lib/libleveldb.${major_version}.dylib \
+        ${libdestroot}/libleveldb.${major_version}.dylib"
+
+    # install documents
+    set docdestroot ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 0755 -d ${docdestroot}/doc
+    xinstall -m 0644 -W ${worksrcpath} \
+        AUTHORS LICENSE NEWS README TODO \
+        ${docdestroot}
+    xinstall -m 0644 -W ${worksrcpath}/doc \
+        benchmark.html doc.css impl.html index.html \
+        log_format.txt table_format.txt \
+        ${docdestroot}/doc
+}
+
+livecheck.type  regex
+livecheck.url   http://code.google.com/p/leveldb/downloads/list
+livecheck.regex {leveldb-([0-9]+\.[0-9]+\.[0-9]+)\.}
