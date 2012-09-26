@@ -19,11 +19,11 @@ long_description \
    GPG encryption, and more. Also supports management \
    of Amazon's CloudFront content delivery network.
 
-homepage            http://s3tools.org/s3cmd \
-                    http://pypi.python.org/pypi/s3cmd/
-master_sites        http://pypi.python.org/packages/source/s/s3cmd/
-distname            s3cmd-${version}
-
+homepage        http://s3tools.org/s3cmd \
+                http://pypi.python.org/pypi/s3cmd/
+master_sites    http://pypi.python.org/packages/source/s/s3cmd/
+dist_subdir     python
+distname        s3cmd-${version}
 checksums \
     md5    ff76d6f266342598e849dd2acd8500db \
     rmd160 ad4891d2a88e912d273c493f2e09107b66706cfc \

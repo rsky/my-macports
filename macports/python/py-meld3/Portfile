@@ -16,19 +16,19 @@ long_description \
    meld3 is an HTML/XML templating system for Python 2.3+ which keeps \
    template markup and dynamic rendering logic separate from one another.
 
-homepage            http://www.plope.com/software/meld3/ \
-                    http://pypi.python.org/pypi/meld3/
-master_sites        http://pypi.python.org/packages/source/m/meld3/ \
-                    http://www.plope.com/software/meld3/
-distname            meld3-${version}
-
+homepage        http://www.plope.com/software/meld3/ \
+                http://pypi.python.org/pypi/meld3/
+master_sites    http://pypi.python.org/packages/source/m/meld3/ \
+                http://www.plope.com/software/meld3/
+dist_subdir     python
+distname        meld3-${version}
 checksums \
     md5    9ba0c23a35048941420947c0607afbf7 \
     rmd160 7a33688ce1d3ccb1bf60f6b2c8ab07c25c963425 \
     sha256 79aea88005ecfc03e6e46d3e5548c81e985560863a982264b0d51bd5b493893e
 
-patchfiles          patch-ez_setup.py \
-                    patch-setup.py
+patchfiles      patch-ez_setup.py \
+                patch-setup.py
 
 python.versions 24 25 26 27
 python.default_version 27

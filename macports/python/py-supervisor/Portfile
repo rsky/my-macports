@@ -16,11 +16,11 @@ long_description \
    The supervisor is a client/server system that allows its users \
    to control a number of processes on UNIX-like operating systems
 
-homepage            http://supervisord.org/ \
-                    http://pypi.python.org/pypi/supervisor/
-master_sites        http://pypi.python.org/packages/source/s/supervisor/
-distname            supervisor-${version}
-
+homepage        http://supervisord.org/ \
+                http://pypi.python.org/pypi/supervisor/
+master_sites    http://pypi.python.org/packages/source/s/supervisor/
+dist_subdir     python
+distname        supervisor-${version}
 checksums \
     md5    5a2f1bb052bb2bbfd6d69ba8b1e1dad7 \
     rmd160 79ba6f3ee033b583f003443288d95e6e4d62b04d \
