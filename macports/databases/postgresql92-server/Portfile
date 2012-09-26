@@ -60,9 +60,4 @@ post-install {
         by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
 }
 
-livecheck.type  regex
-livecheck.url   ${homepage}
-livecheck.regex (9\\.2\\.\[0-9\]+)
-#livecheck.url  ${homepage}/developer/beta
-#livecheck.url  ${homepage}/ftp/source/
-#livecheck.regex    (9\\.2\[.0-9\]+\[a-z\]+\[0-9\])
+livecheck.type  none
