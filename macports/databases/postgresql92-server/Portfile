@@ -5,6 +5,7 @@ PortSystem 1.0
 
 name            postgresql92-server
 version         1.0
+revision        1
 categories      databases
 platforms       darwin
 maintainers     mww jwa openmaintainer
@@ -16,6 +17,7 @@ long_description \
 homepage        http://www.postgresql.org/
 master_sites    postgresql
 
+dist_subdir     postgresql92
 depends_run     port:postgresql92
 
 fetch {}
