@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-meld3
-version             0.6.8
+version             0.6.9
 categories-append   textproc www
 license             ZPL
 maintainers         openmaintainer
@@ -23,9 +23,9 @@ master_sites        http://pypi.python.org/packages/source/m/meld3/ \
 distname            meld3-${version}
 
 checksums \
-    md5    94b1591e518909e239fc17777db3c852 \
-    rmd160 e0cdb4370e82d814abaa197725534e82a34141f3 \
-    sha256 a425e9a9e0d9e3d69a2f5c1451d582f1222a7be94a957ca1e5301fd4045b5dbe
+    md5    9ba0c23a35048941420947c0607afbf7 \
+    rmd160 7a33688ce1d3ccb1bf60f6b2c8ab07c25c963425 \
+    sha256 79aea88005ecfc03e6e46d3e5548c81e985560863a982264b0d51bd5b493893e
 
 patchfiles          patch-ez_setup.py \
                     patch-setup.py
@@ -35,6 +35,10 @@ python.default_version 27
 
 if {$subport != $name} {
     depends_build-append    port:py${python.version}-distribute
+
+    if {${python.version} == 24} {
+        depends_lib-append  port:py24-elementtree
+    }
 }
 
 livecheck.type  regex
