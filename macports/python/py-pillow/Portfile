@@ -1,0 +1,78 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-pillow
+version             1.7.7
+categories-append   graphics
+license             MIT
+maintainers         openmaintainer
+
+description         Python Imaging Library (fork)
+long_description \
+   Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library. \
+   Pillow was started for and is currently maintained by the Plone community. \
+   But it is used by many other folks in the Python web community, \
+   and probably elsewhere too.
+
+homepage        http://pypi.python.org/pypi/Pillow/
+master_sites    http://pypi.python.org/packages/source/P/Pillow/
+dist_subdir     python
+distname        Pillow-${version}
+use_zip         yes
+checksums \
+    md5    0617fae88d62422b878906a3c394c687 \
+    rmd160 1cdaa7439d3f52752d85c1132abd0ff2d58d7c41 \
+    sha256 4e9a17d62bc221ed932a3bccdf710331f014e0432b61e91e7222b7c93e91de48
+
+python.default_version 27
+python.versions 24 25 26 27 31 32 33
+
+if {$subport != $name} {
+    if {${python.version} < 30} {
+        patchfiles-append   patch-setup-python2.py
+    } else {
+        patchfiles-append   patch-setup-python3.py
+    }
+    depends_build-append    port:py${python.version}-distribute
+    depends_lib-append      port:freetype \
+                            port:jpeg \
+                            port:lcms \
+                            port:tiff \
+                            port:zlib
+
+    livecheck.type  none
+} else {
+    livecheck.type  regex
+    livecheck.url   ${homepage}
+    livecheck.regex {Pillow ([0-9.]+)}
+}
+
+set docdestroot ${destroot}${prefix}/share/doc/${subport}
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|g" ${worksrcpath}/setup.py
+}
+
+post-destroot {
+    xinstall -d -m 0755 ${docdestroot}
+    xinstall -m 0644 -W ${worksrcpath}/docs \
+        BUILDME CHANGES CONTENTS HISTORY.txt INSTALL.txt \
+        ${docdestroot}
+}
+
+variant doc description {Install documentation} {
+    post-destroot {
+        foreach f [glob ${worksrcpath}/doc/*.css] {
+            file copy ${f} ${docdestroot}
+        }
+        foreach f [glob ${worksrcpath}/doc/*.html] {
+            file copy ${f} ${docdestroot}
+        }
+        foreach f [glob ${worksrcpath}/doc/*.rst] {
+            file copy ${f} ${docdestroot}
+        }
+    }
+}
