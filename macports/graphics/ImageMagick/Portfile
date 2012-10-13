@@ -8,7 +8,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.7.9-10
+version                     6.8.0-0
 revision                    0
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,8 +39,8 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   rmd160  80025f66fbf53cac30f195ba59c4c6f5a202bf09 \
-                            sha256  3697de6748b999b1ed7f9132c4bf69667692696877fdd24062d4cbd0bf49f790
+checksums                   rmd160  2b6cbc98ece2f62476e9f562d70f20961d82602a \
+                            sha256  d43baa2d03056f97dbdb958075ef362bc6e5fba6af92b7a67c8f36970207d8af
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
@@ -189,7 +189,8 @@ variant no_ghostscript {
     depends_run-delete      port:urw-fonts
     depends_lib-delete      port:ghostscript
     archcheck.files-delete  lib/libgs.dylib
-    configure.args-delete   --with-gslib
+    configure.args-delete   --with-gs-font-dir \
+                            --with-gslib
     configure.args-append   --without-gslib
 }
 
