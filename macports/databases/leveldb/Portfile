@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                leveldb
-version             1.5.0
+version             1.7.0
 license             BSD
 maintainers         openmaintainer
 platforms           darwin
@@ -18,16 +18,16 @@ homepage            http://code.google.com/p/leveldb/
 master_sites        googlecode
 
 checksums \
-    md5     6797e19a0a9f9bb1c1ba356bf89227f0 \
-    rmd160  1a2e0b8622d9a5de8d7f949bc380d877b785adc1 \
-    sha256  cb73489af84d9d97d3e7d234a2f5e3a0c89ffadb657e7dd9e9047227778e57ba
+    md5     5c3c6cfbb16a21cdbea0db656aa32fec \
+    rmd160  3f74de6abbdfd87f7e62584ea0f39dbf5c8b9868 \
+    sha256  ddce9a31f51d147158105240468cf1e598ff7f8f32f20eea14847bc13b7edd2e
 
 set major_version [lindex [split ${version} .] 0]
 set minor_version [lindex [split ${version} .] 1]
 
-configure {
-    system "cd ${worksrcpath} && ./build_detect_platform build_config.mk"
-}
+depends_lib     port:snappy
+
+configure {}
 
 test.run        yes
 test.target     check
