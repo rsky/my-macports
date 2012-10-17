@@ -5,7 +5,7 @@ PortSystem 1.0
 
 name            postgresql92-server
 version         1.0
-revision        1
+revision        2
 categories      databases
 platforms       darwin
 maintainers     mww jwa openmaintainer
@@ -13,6 +13,8 @@ license         Permissive
 description     run postgresql92 as server
 long_description \
     ${description} (without creating any user)
+
+supported_archs noarch
 
 homepage        http://www.postgresql.org/
 master_sites    postgresql
