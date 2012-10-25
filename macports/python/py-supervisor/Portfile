@@ -46,6 +46,8 @@ if {$subport != $name} {
 
 set docdestroot ${destroot}${prefix}/share/doc/${subport}
 set confdir ${prefix}/etc/${subport}
+set sample_conf ${confdir}/supervisord.conf.sample
+set default_conf ${confdir}/supervisord.conf
 
 destroot.keepdirs-append \
     ${destroot}${prefix}/var/log/${subport} \
@@ -63,16 +65,14 @@ post-destroot {
     xinstall -d ${destroot}${confdir}
     xinstall -m 0644 \
         ${portpath}/files/supervisord.conf.sample \
-        ${destroot}${confdir}/supervisord.conf.sample
-    reinplace "s|%PREFIX%|${prefix}|g" \
-        ${destroot}${confdir}/supervisord.conf.sample
-    reinplace "s|%NAME%|${subport}|g" \
-        ${destroot}${confdir}/supervisord.conf.sample
+        ${destroot}${sample_conf}
+    reinplace "s|%PREFIX%|${prefix}|g" ${destroot}${sample_conf}
+    reinplace "s|%NAME%|${subport}|g" ${destroot}${sample_conf}
 }
 
 post-activate {
-    if {![file exists ${confdir}/supervisord.conf]} {
-        file copy ${confdir}/supervisord.conf.sample ${confdir}/supervisord.conf
+    if {![file exists ${default_conf}]} {
+        file copy ${sample_conf} ${default_conf}
     }
 }
 
@@ -96,6 +96,8 @@ variant startupitem description {Create the startup item} {
         "\${BINDIR}/supervisord -c \${CONFDIR}/supervisord.conf"
     startupitem.stop \
         "\${BINDIR}/supervisorctl -c \${CONFDIR}/supervisord.conf shutdown"
+    startupitem.stop \
+        "\${BINDIR}/supervisorctl -c \${CONFDIR}/supervisord.conf reload"
 }
 
 livecheck.type  regex
