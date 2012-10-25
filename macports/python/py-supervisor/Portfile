@@ -6,6 +6,7 @@ PortGroup           python 1.0
 
 name                py-supervisor
 version             3.0b1
+revision            1
 categories-append   sysutils
 license             ZPL
 maintainers         openmaintainer
@@ -44,6 +45,11 @@ if {$subport != $name} {
 }
 
 set docdestroot ${destroot}${prefix}/share/doc/${subport}
+set confdir ${prefix}/etc/${subport}
+
+destroot.keepdirs-append \
+    ${destroot}${prefix}/var/log/${subport} \
+    ${destroot}${prefix}/var/run/${subport}
 
 post-destroot {
     xinstall -d ${docdestroot}
@@ -52,6 +58,21 @@ post-destroot {
     }
     foreach f [glob ${worksrcpath}/*.rst] {
         file copy ${f} ${docdestroot}
+    }
+
+    xinstall -d ${destroot}${confdir}
+    xinstall -m 0644 \
+        ${portpath}/files/supervisord.conf.sample \
+        ${destroot}${confdir}/supervisord.conf.sample
+    reinplace "s|%PREFIX%|${prefix}|g" \
+        ${destroot}${confdir}/supervisord.conf.sample
+    reinplace "s|%NAME%|${subport}|g" \
+        ${destroot}${confdir}/supervisord.conf.sample
+}
+
+post-activate {
+    if {![file exists ${confdir}/supervisord.conf]} {
+        file copy ${confdir}/supervisord.conf.sample ${confdir}/supervisord.conf
     }
 }
 
@@ -63,6 +84,18 @@ variant doc description {Install documentation} {
 
 variant no_suffix description {Don't add the Python version suffix for the executables} {
     python.link_binaries_suffix
+}
+
+variant startupitem description {Create the startup item} {
+    startupitem.create  yes
+    startupitem.name    ${subport}
+    startupitem.pidfile auto ${prefix}/var/run/${subport}/supervisord.pid
+    startupitem.init \
+        "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFDIR=${confdir}"
+    startupitem.start \
+        "\${BINDIR}/supervisord -c \${CONFDIR}/supervisord.conf"
+    startupitem.stop \
+        "\${BINDIR}/supervisorctl -c \${CONFDIR}/supervisord.conf shutdown"
 }
 
 livecheck.type  regex
