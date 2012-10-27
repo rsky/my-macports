@@ -58,14 +58,14 @@ variant tools description {Install RabbitMQ C Client Tools} {
     depends_lib-append      port:popt port:xmlto
 }
 
-pre-configure {
-     system "cd ${worksrcpath} && ${prefix}/bin/autoreconf -i"
-}
-
 post-extract {
     file rename \
         ${workpath}/${codegen_user}-${codegen_name}-${codegen_hash} \
         ${worksrcpath}/codegen
+}
+
+pre-configure {
+     system "cd ${worksrcpath} && ${prefix}/bin/autoreconf -i"
 }
 
 livecheck.type  regex
