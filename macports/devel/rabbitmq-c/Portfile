@@ -54,8 +54,9 @@ depends_build       port:autoconf port:automake port:libtool
 
 variant tools description {Install RabbitMQ C Client Tools} {
     configure.args-delete   --without-popt --without-xmlto
-    configure.args-append   --with-popt=${prefix} --with-xmlto=${prefix}
-    depends_lib-append      port:popt port:xmlto
+    configure.args-append   --with-popt --with-xmlto=check
+    depends_build-append    port:xmlto
+    depends_lib-append      port:popt
 }
 
 post-extract {
