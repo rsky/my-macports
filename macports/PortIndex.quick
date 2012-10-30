@@ -31,7 +31,7 @@ py25-s3cmd 16862
 py26-s3cmd 17520
 py27-s3cmd 18178
 py-supervisor 18836
-py24-supervisor 19417
-py25-supervisor 20012
-py26-supervisor 20585
-py27-supervisor 21158
+py24-supervisor 19405
+py25-supervisor 19988
+py26-supervisor 20549
+py27-supervisor 21110
