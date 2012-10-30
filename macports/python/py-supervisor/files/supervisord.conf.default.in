@@ -135,5 +135,5 @@ serverurl=unix://%PREFIX%/var/run/%NAME%/supervisor.sock ; use a unix:// URL  fo
 ; interpreted as relative to this file.  Included files *cannot*
 ; include files themselves.
 
-;[include]
-;files = relative/directory/*.ini
+[include]
+files = conf.d/*.conf

@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-supervisor
 version             3.0b1
-revision            1
+revision            2
 categories-append   sysutils
 license             ZPL
 maintainers         openmaintainer
@@ -46,10 +46,11 @@ if {$subport != $name} {
 
 set docdestroot ${destroot}${prefix}/share/doc/${subport}
 set confdir ${prefix}/etc/${subport}
-set sample_conf ${confdir}/supervisord.conf.sample
-set default_conf ${confdir}/supervisord.conf
+set default_conf ${confdir}/supervisord.conf.default
+set supervisord_conf ${confdir}/supervisord.conf
 
 destroot.keepdirs-append \
+    ${destroot}${confdir}/conf.d \
     ${destroot}${prefix}/var/log/${subport} \
     ${destroot}${prefix}/var/run/${subport}
 
@@ -64,15 +65,15 @@ post-destroot {
 
     xinstall -d ${destroot}${confdir}
     xinstall -m 0644 \
-        ${portpath}/files/supervisord.conf.sample \
-        ${destroot}${sample_conf}
-    reinplace "s|%PREFIX%|${prefix}|g" ${destroot}${sample_conf}
-    reinplace "s|%NAME%|${subport}|g" ${destroot}${sample_conf}
+        ${portpath}/files/supervisord.conf.default.in \
+        ${destroot}${default_conf}
+    reinplace "s|%PREFIX%|${prefix}|g" ${destroot}${default_conf}
+    reinplace "s|%NAME%|${subport}|g" ${destroot}${default_conf}
 }
 
 post-activate {
-    if {![file exists ${default_conf}]} {
-        file copy ${sample_conf} ${default_conf}
+    if {![file exists ${supervisord_conf}]} {
+        file copy ${default_conf} ${supervisord_conf}
     }
 }
 
@@ -86,18 +87,18 @@ variant no_suffix description {Don't add the Python version suffix for the execu
     python.link_binaries_suffix
 }
 
-variant startupitem description {Create the startup item} {
+if {$subport != $name} {
     startupitem.create  yes
     startupitem.name    ${subport}
     startupitem.pidfile auto ${prefix}/var/run/${subport}/supervisord.pid
     startupitem.init \
-        "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFDIR=${confdir}"
+        "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFIG=${supervisord_conf}"
     startupitem.start \
-        "\${BINDIR}/supervisord -c \${CONFDIR}/supervisord.conf"
+        "\${BINDIR}/supervisord -c \${CONFIG}"
     startupitem.stop \
-        "\${BINDIR}/supervisorctl -c \${CONFDIR}/supervisord.conf shutdown"
+        "\${BINDIR}/supervisorctl -c \${CONFIG} shutdown"
     startupitem.stop \
-        "\${BINDIR}/supervisorctl -c \${CONFDIR}/supervisord.conf reload"
+        "\${BINDIR}/supervisorctl -c \${CONFIG} reload"
 }
 
 livecheck.type  regex
