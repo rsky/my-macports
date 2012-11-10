@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pillow
-version             1.7.7
+version             1.7.8
 categories-append   graphics
 license             MIT
 maintainers         openmaintainer
@@ -23,19 +23,16 @@ dist_subdir     python
 distname        Pillow-${version}
 use_zip         yes
 checksums \
-    md5    0617fae88d62422b878906a3c394c687 \
-    rmd160 1cdaa7439d3f52752d85c1132abd0ff2d58d7c41 \
-    sha256 4e9a17d62bc221ed932a3bccdf710331f014e0432b61e91e7222b7c93e91de48
+    md5    41d8688d4db72673069a6dc63b5289d6 \
+    rmd160 e52cec02d943951a80d30b32b1764cb3ae87b283 \
+    sha256 907f5342b1df1d277dcc10df2aeabc61099e5a07e0676b9fcd1bb7379890c0ee
 
 python.default_version 27
 python.versions 24 25 26 27 31 32 33
 
 if {$subport != $name} {
-    if {${python.version} < 30} {
-        patchfiles-append   patch-setup-python2.py
-    } else {
-        patchfiles-append   patch-setup-python3.py
-    }
+    conflicts               py${python.version}-pil
+    patchfiles-append       patch-setup.py
     depends_build-append    port:py${python.version}-distribute
     depends_lib-append      port:freetype \
                             port:jpeg \
@@ -56,15 +53,9 @@ post-patch {
     reinplace "s|__PREFIX__|${prefix}|g" ${worksrcpath}/setup.py
 }
 
-post-destroot {
-    xinstall -d -m 0755 ${docdestroot}
-    xinstall -m 0644 -W ${worksrcpath}/docs \
-        BUILDME CHANGES CONTENTS HISTORY.txt INSTALL.txt \
-        ${docdestroot}
-}
-
 variant doc description {Install documentation} {
     post-destroot {
+        xinstall -d -m 0755 ${docdestroot}
         foreach f [glob ${worksrcpath}/doc/*.css] {
             file copy ${f} ${docdestroot}
         }
