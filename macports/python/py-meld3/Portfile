@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-meld3
-version             0.6.9
+version             0.6.10
 categories-append   textproc www
 license             ZPL
 maintainers         openmaintainer
@@ -23,9 +23,9 @@ master_sites    http://pypi.python.org/packages/source/m/meld3/ \
 dist_subdir     python
 distname        meld3-${version}
 checksums \
-    md5    9ba0c23a35048941420947c0607afbf7 \
-    rmd160 7a33688ce1d3ccb1bf60f6b2c8ab07c25c963425 \
-    sha256 79aea88005ecfc03e6e46d3e5548c81e985560863a982264b0d51bd5b493893e
+    md5    42e58624e9d427be7659d7a28e2b0b6f \
+    rmd160 d96c170f7fa2a52418bff8fd9f6e9d03f9caef27 \
+    sha256 6642f2444f3527a9338104edc2d1b420ba5a770b578063f729530d1f2f01a271
 
 patchfiles      patch-ez_setup.py \
                 patch-setup.py
