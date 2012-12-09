@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+
+name                mysql55-mroonga
+version             2.09
+revision            0
+categories-append   textproc
+license             LGPL-2.1
+maintainers         openmaintainer
+
+set mysql_version           5.5.28
+set mysql_version_branch    5.5
+
+description         Fast fulltext search on MySQL
+long_description \
+   Mroonga is a storage engine for MySQL. \
+   It provides fast fulltext search feature to all MySQL users. \
+   Mroonga was called groonga storage engine.
+
+homepage        http://mroonga.github.com/
+distname        mroonga-${version}
+
+worksrcdir      ${distname}
+
+distfiles  \
+    ${distname}${extract.suffix}:src \
+    mysql-${mysql_version}.tar.gz:mysql
+
+master_sites \
+    https://github.com/downloads/mroonga/mroonga/:src \
+    http://mysql.he.net/Downloads/MySQL-${mysql_version_branch}/:mysql \
+    http://mirrors.sunsite.dk/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
+    http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
+    http://mirror.facebook.net/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
+    http://ftp.plusline.de/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
+    http://mysql.mirrors.pair.com/Downloads/MySQL-${mysql_version_branch}/:mysql
+
+checksums \
+    ${distname}${extract.suffix} \
+        md5    775385ef67d4ac73da9acbecc467af18 \
+        rmd160 71a71f822ebb44d872caac6ea6192485eae4bd04 \
+        sha256 caaeb7d2e101926ebcd70577da61daed6e3aa31d810e21a97a3f7114b8ed6f78 \
+    mysql-${mysql_version}.tar.gz \
+        md5    da8ddb3d00e6e159153d2444360f52a8 \
+        rmd160 dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
+        sha256 f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f
+
+depends_lib         port:groonga port:mysql55
+
+configure.args      --with-mysql-source=${workpath}/mysql-${mysql_version} \
+                    --with-mysql-config=${prefix}/lib/mysql55/bin/mysql_config
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex {Mroonga ([0-9.]+) has}
