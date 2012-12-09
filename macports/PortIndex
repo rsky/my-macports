@@ -1,5 +1,7 @@
 leveldb 438
 variants universal portdir databases/leveldb description {A fast and lightweight key/value database library by Google.} homepage http://code.google.com/p/leveldb/ epoch 0 platforms darwin name leveldb depends_lib port:snappy long_description {LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.} maintainers openmaintainer license BSD version 1.7.0 revision 0
+mysql55-mroonga 452
+variants universal portdir databases/mysql55-mroonga description {Fast fulltext search on MySQL} homepage http://mroonga.github.com/ epoch 0 name mysql55-mroonga depends_lib {port:groonga port:mysql55} long_description {Mroonga is a storage engine for MySQL. It provides fast fulltext search feature to all MySQL users. Mroonga was called groonga storage engine.} license LGPL-2.1 maintainers openmaintainer categories textproc version 2.09 revision 0
 postgresql92-server 371
 portdir databases/postgresql92-server description {run postgresql92 as server} homepage http://www.postgresql.org/ epoch 0 depends_run port:postgresql92 platforms darwin name postgresql92-server license Permissive maintainers {mww jwa openmaintainer} long_description {{run postgresql92 as server} (without creating any user)} categories databases version 1.0 revision 2
 rabbitmq-c 442
