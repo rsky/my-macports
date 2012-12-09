@@ -9,7 +9,8 @@ PortGroup                   conflicts_build 1.0
 
 name                        ImageMagick
 version                     6.8.0-8
-revision                    0
+revision                    1
+set shlib_version           7
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
 maintainers                 ryandesign
@@ -210,14 +211,40 @@ variant perl description {Install PerlMagick} {
     }
 }
 
+set libdestroot ${destroot}${prefix}/lib
+
 variant q8 conflicts q16 q32 description {Use 8 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=8
+    post-destroot {
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickCore-Q8.${shlib_version}.dylib \
+            libMagickCore-Q8.dylib"
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickWand-Q8.${shlib_version}.dylib \
+            libMagickWand-Q8.dylib"
+    }
 }
 variant q16 conflicts q8 q32 description {Use 16 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=16
+    post-destroot {
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickCore-Q16.${shlib_version}.dylib \
+            libMagickCore-Q16.dylib"
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickWand-Q16.${shlib_version}.dylib \
+            libMagickWand-Q16.dylib"
+    }
 }
 variant q32 conflicts q8 q16 description {Use 32 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=32
+    post-destroot {
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickCore-Q32.${shlib_version}.dylib \
+            libMagickCore-Q32.dylib"
+        system "cd ${libdestroot} && ln -f -s \
+            libMagickWand-Q32.${shlib_version}.dylib \
+            libMagickWand-Q32.dylib"
+    }
 }
 if {![variant_isset q8] && ![variant_isset q32]} {
     default_variants +q16
