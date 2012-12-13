@@ -8,9 +8,8 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.0-8
-revision                    1
-set shlib_version           7
+version                     6.8.0-9
+revision                    0
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
 maintainers                 ryandesign
@@ -40,8 +39,8 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   rmd160  367a6228e438e1519119e911d82053528bd8c8fe \
-                            sha256  54d8f508ec8c478e7a44cd333f42db0eeb87b7bcd2a95893f6b464b125bbfadf
+checksums                   rmd160  a7c526bd883d87c8713c62a74278b013222484ea \
+                            sha256  c7d3ef1947d47722fcfeda887ba3615f46711ac73ce0a5fe99aac621eb57ff73
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
@@ -211,40 +210,14 @@ variant perl description {Install PerlMagick} {
     }
 }
 
-set libdestroot ${destroot}${prefix}/lib
-
 variant q8 conflicts q16 q32 description {Use 8 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=8
-    post-destroot {
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickCore-Q8.${shlib_version}.dylib \
-            libMagickCore-Q8.dylib"
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickWand-Q8.${shlib_version}.dylib \
-            libMagickWand-Q8.dylib"
-    }
 }
 variant q16 conflicts q8 q32 description {Use 16 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=16
-    post-destroot {
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickCore-Q16.${shlib_version}.dylib \
-            libMagickCore-Q16.dylib"
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickWand-Q16.${shlib_version}.dylib \
-            libMagickWand-Q16.dylib"
-    }
 }
 variant q32 conflicts q8 q16 description {Use 32 bits per pixel quantum} {
     configure.args-append   --with-quantum-depth=32
-    post-destroot {
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickCore-Q32.${shlib_version}.dylib \
-            libMagickCore-Q32.dylib"
-        system "cd ${libdestroot} && ln -f -s \
-            libMagickWand-Q32.${shlib_version}.dylib \
-            libMagickWand-Q32.dylib"
-    }
 }
 if {![variant_isset q8] && ![variant_isset q32]} {
     default_variants +q16
