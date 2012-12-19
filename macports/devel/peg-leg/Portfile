@@ -36,7 +36,8 @@ destroot {
     xinstall -m 0755 -d ${docdestroot}/examples
     xinstall -m 0644 ${filespath}/peg.1.html ${docdestroot}
     foreach f [glob ${worksrcpath}/examples/*] {
-        file copy ${f} ${docdestroot}:    }
+        file copy ${f} ${docdestroot}
+    }
 }
 
 livecheck.type  regex
