@@ -1,0 +1,44 @@
+PortSystem      1.0
+
+name            jemalloc
+version         3.2.0
+revision        0
+license         BSD
+maintainers     openmaintainer
+platforms       darwin
+
+description     a general-purpose scalable concurrent malloc(3) implementation
+long_description \
+    jemalloc is a general-purpose scalable concurrent malloc(3) implementation.
+
+homepage        http://www.canonware.com/jemalloc/
+master_sites    http://www.canonware.com/download/jemalloc/
+
+use_bzip2       yes
+
+checksums \
+    md5    1f7b2099a0d33b803c67e8a9a8c2615e \
+    rmd160 1e0ba31b601888d4365608fe2e1a282bd1780357 \
+    sha256 96eff12ec2bcf135e502cad8df67af484f491aa19856eaa5ee89ec771abe040f \
+
+depends_build   port:libxslt
+
+post-destroot {
+    system "install_name_tool -id ${prefix}/lib/libjemalloc.1.dylib ${destroot}${prefix}/lib/libjemalloc.1.dylib"
+}
+
+test.run        yes
+test.target     check
+
+livecheck.type  regex
+livecheck.url   http://www.canonware.com/jemalloc/download.html
+livecheck.regex {>jemalloc ([0-9]+\.[0-9.]+)<}
+
+# -*-
+# coding: utf-8
+# mode: tcl
+# tab-width: 4
+# indent-tabs-mode: nil
+# c-basic-offset: 4
+# -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
