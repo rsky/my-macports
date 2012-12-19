@@ -1,14 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+PortSystem      1.0
 
-PortSystem          1.0
-
-name                rabbitmq-c
-version             0.2
-revision            0
-license             MIT
-maintainers         openmaintainer
-platforms           darwin
+name            rabbitmq-c
+version         0.2
+revision        0
+license         MIT
+maintainers     openmaintainer
+platforms       darwin
 
 set git_user        alanxz
 set git_tag         0.2
@@ -21,19 +18,19 @@ set codegen_tag     rabbitmq_v2_8_7
 set codegen_hash    4e97f73
 set codegen_suffix  0-g4e97f73
 
-description         RabbitMQ C client
+description     RabbitMQ C client
 long_description \
    This is a C-language AMQP client library for use \
    with AMQP servers speaking protocol versions 0-9-1.
 
-homepage            http://alanxz.github.com/rabbitmq-c/
+homepage        http://alanxz.github.com/rabbitmq-c/
 master_sites  \
     https://github.com/${git_user}/${name}/zipball/${git_tag}:librabbitmq \
     https://github.com/${codegen_user}/${codegen_name}/zipball/${codegen_tag}:codegen
 
-worksrcdir          ${git_user}-${name}-${git_hash}
+worksrcdir      ${git_user}-${name}-${git_hash}
 
-use_zip             yes
+use_zip         yes
 distfiles \
     ${git_user}-${name}-${git_tag}-${git_suffix}.zip:librabbitmq \
     ${codegen_user}-${codegen_name}-${codegen_tag}-${codegen_suffix}.zip:codegen
@@ -48,9 +45,9 @@ checksums \
         rmd160 3e0eb33c58ee88cd7449662c935ac98f1b5c7fa2 \
         sha256 2d136abc6041aea20d408d0f6ccb7638bb83fc16edc1269c7b6439292a9ce22c
 
-configure.args      --without-popt --without-xmlto
+configure.args  --without-popt --without-xmlto
 
-depends_build       port:autoconf port:automake port:libtool
+depends_build   port:autoconf port:automake port:libtool
 
 variant tools description {Install RabbitMQ C Client Tools} {
     configure.args-delete   --without-popt --without-xmlto
@@ -72,3 +69,12 @@ pre-configure {
 livecheck.type  regex
 livecheck.url   https://github.com/${git_user}/rabbitmq-c/tags
 livecheck.regex {([0-9]+\.[0-9.]+)\.zip}
+
+# Local variables:
+# coding: utf-8
+# mode: tcl
+# tab-width: 4
+# indent-tabs-mode: nil
+# c-basic-offset: 4
+# End:
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4

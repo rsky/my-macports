@@ -1,16 +1,13 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+PortSystem      1.0
+PortGroup       python 1.0
 
-PortSystem          1.0
-PortGroup           python 1.0
-
-name                py-pillow
-version             1.7.8
+name            py-pillow
+version         1.7.8
 categories-append   graphics
-license             MIT
-maintainers         openmaintainer
+license         MIT
+maintainers     openmaintainer
 
-description         Python Imaging Library (fork)
+description     Python Imaging Library (fork)
 long_description \
    Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library. \
    Pillow was started for and is currently maintained by the Plone community. \
@@ -67,3 +64,12 @@ variant doc description {Install documentation} {
         }
     }
 }
+
+# Local variables:
+# coding: utf-8
+# mode: tcl
+# tab-width: 4
+# indent-tabs-mode: nil
+# c-basic-offset: 4
+# End:
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4

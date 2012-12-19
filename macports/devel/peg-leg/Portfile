@@ -36,19 +36,18 @@ destroot {
     xinstall -m 0755 -d ${docdestroot}/examples
     xinstall -m 0644 ${filespath}/peg.1.html ${docdestroot}
     foreach f [glob ${worksrcpath}/examples/*] {
-        file copy ${f} ${docdestroot}/examples
-    }
+        file copy ${f} ${docdestroot}:    }
 }
 
 livecheck.type  regex
 livecheck.url   ${homepage}
 livecheck.regex {>peg-([0-9]+\.[0-9.]+)<}
 
-# -*-
+# Local variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4
 # indent-tabs-mode: nil
 # c-basic-offset: 4
-# -*-
+# End:
 # vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
