@@ -70,7 +70,7 @@ livecheck.type  regex
 livecheck.url   https://github.com/${git_user}/rabbitmq-c/tags
 livecheck.regex {([0-9]+\.[0-9.]+)\.zip}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

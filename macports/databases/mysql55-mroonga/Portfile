@@ -53,7 +53,7 @@ livecheck.type  regex
 livecheck.url   ${homepage}
 livecheck.regex {Mroonga ([0-9.]+) has}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

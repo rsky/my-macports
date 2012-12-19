@@ -102,7 +102,7 @@ livecheck.type  regex
 livecheck.url   http://pypi.python.org/pypi/supervisor/
 livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

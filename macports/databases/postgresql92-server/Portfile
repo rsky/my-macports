@@ -61,7 +61,7 @@ post-install {
 
 livecheck.type  none
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

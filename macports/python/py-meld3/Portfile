@@ -42,7 +42,7 @@ livecheck.type  regex
 livecheck.url   http://pypi.python.org/pypi/meld3/
 livecheck.regex {meld3 ([0-9.]+)}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

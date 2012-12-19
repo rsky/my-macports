@@ -65,7 +65,7 @@ variant doc description {Install documentation} {
     }
 }
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

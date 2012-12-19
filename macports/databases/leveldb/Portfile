@@ -72,7 +72,7 @@ livecheck.type  regex
 livecheck.url   http://code.google.com/p/leveldb/downloads/list
 livecheck.regex {leveldb-([0-9]+\.[0-9]+\.[0-9]+)\.}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

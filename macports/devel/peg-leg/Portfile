@@ -44,7 +44,7 @@ livecheck.type  regex
 livecheck.url   ${homepage}
 livecheck.regex {>peg-([0-9]+\.[0-9.]+)<}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4

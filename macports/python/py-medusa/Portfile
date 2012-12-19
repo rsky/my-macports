@@ -35,7 +35,7 @@ livecheck.type  regex
 livecheck.url   http://pypi.python.org/pypi/medusa/
 livecheck.regex {medusa(?: |&nbsp;)([0-9.]+(?:-[a-z]+[0-9]+)?)}
 
-# Local variables:
+# Local Variables:
 # coding: utf-8
 # mode: tcl
 # tab-width: 4
