@@ -20,16 +20,27 @@ use_configure   no
 build           {}
 destroot        {}
 
-set php_prefix  /opt/php/main
+set php_prefix          /opt/php/main
+startupitem.create      yes
+startupitem.name        ${name}
+
+subport opt-php53-fpm {
+    set php_prefix      /opt/php/5.3
+    startupitem.name    ${subport}
+}
+
+subport opt-php54-fpm {
+    set php_prefix      /opt/php/5.4
+    startupitem.name    ${subport}
+}
+
 set php_fpm_bin ${php_prefix}/sbin/php-fpm
 set fpm_config  ${php_prefix}/etc/php-fpm.conf
 set fpm_pidfile ${php_prefix}/var/run/php-fpm.pid
 set fpm_logfile ${php_prefix}/var/log/php-fpm.log
 
-startupitem.create      yes
-startupitem.name        ${name}
 startupitem.pidfile     auto ${fpm_pidfile}
-#startupitem.logfile     ${fpm_logfile}
+#startupitem.logfile    ${fpm_logfile}
 startupitem.executable  ${php_fpm_bin} --fpm-config=${fpm_config} --pid=${fpm_pidfile} --daemonize
 
 # Local Variables:
