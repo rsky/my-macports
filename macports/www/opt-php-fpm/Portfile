@@ -43,6 +43,8 @@ startupitem.pidfile     auto ${fpm_pidfile}
 #startupitem.logfile    ${fpm_logfile}
 startupitem.executable  ${php_fpm_bin} --fpm-config=${fpm_config} --pid=${fpm_pidfile} --daemonize
 
+livecheck.type  none
+
 # Local Variables:
 # coding: utf-8
 # mode: tcl
