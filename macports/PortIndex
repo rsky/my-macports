@@ -78,9 +78,9 @@ py26-supervisor 541
 variants {doc no_suffix} depends_build port:py26-distribute portdir python/py-supervisor description {Process manager for UNIX-like OSs} homepage {http://supervisord.org/ http://pypi.python.org/pypi/supervisor/} epoch 0 name py26-supervisor depends_lib {port:python26 port:py26-meld3 port:py26-medusa} long_description {The supervisor is a client/server system that allows its users to control a number of processes on UNIX-like operating systems} maintainers openmaintainer license ZPL version 3.0b1 categories {python sysutils} revision 2
 py27-supervisor 541
 variants {doc no_suffix} depends_build port:py27-distribute portdir python/py-supervisor description {Process manager for UNIX-like OSs} homepage {http://supervisord.org/ http://pypi.python.org/pypi/supervisor/} epoch 0 name py27-supervisor depends_lib {port:python27 port:py27-meld3 port:py27-medusa} long_description {The supervisor is a client/server system that allows its users to control a number of processes on UNIX-like operating systems} maintainers openmaintainer license ZPL version 3.0b1 categories {python sysutils} revision 2
-opt-php-fpm 345
-subports {opt-php53-fpm opt-php54-fpm} portdir www/opt-php-fpm description {PHP FPM Startup Item} homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php-fpm license {Public Domain} maintainers openmaintainer long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php/main} version 1.0 revision 0
-opt-php53-fpm 308
-description {PHP FPM Startup Item} portdir www/opt-php-fpm homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php53-fpm long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php/main} maintainers openmaintainer license {Public Domain} version 1.0 revision 0
-opt-php54-fpm 308
-description {PHP FPM Startup Item} portdir www/opt-php-fpm homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php54-fpm long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php/main} maintainers openmaintainer license {Public Domain} version 1.0 revision 0
+opt-php-fpm 340
+subports {opt-php53-fpm opt-php54-fpm} portdir www/opt-php-fpm description {PHP FPM Startup Item} homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php-fpm license {Public Domain} maintainers openmaintainer long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php} version 1.0 revision 0
+opt-php53-fpm 303
+description {PHP FPM Startup Item} portdir www/opt-php-fpm homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php53-fpm long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php} maintainers openmaintainer license {Public Domain} version 1.0 revision 0
+opt-php54-fpm 303
+description {PHP FPM Startup Item} portdir www/opt-php-fpm homepage http://www.php.net/manual/en/install.fpm.php epoch 0 name opt-php54-fpm long_description {The startup item of PHP FastCGI Process Manager installed to /opt/php} maintainers openmaintainer license {Public Domain} version 1.0 revision 0
