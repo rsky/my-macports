@@ -9,7 +9,7 @@ supported_archs noarch
 
 description     PHP FPM Startup Item
 long_description \
-    The startup item of PHP FastCGI Process Manager installed to /opt/php/main
+    The startup item of PHP FastCGI Process Manager installed to /opt/php
 
 homepage        http://www.php.net/manual/en/install.fpm.php
 
