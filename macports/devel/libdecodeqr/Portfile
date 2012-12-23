@@ -3,7 +3,7 @@ PortSystem      1.0
 name            libdecodeqr
 version         0.9.3
 revision        0
-license         BSD
+license         LGPL-2.1
 maintainers     openmaintainer
 platforms       darwin
 
