@@ -1,7 +1,7 @@
 PortSystem      1.0
 
 name            mysql55-mroonga
-version         2.09
+version         2.10
 revision        0
 categories-append   textproc
 license         LGPL-2.1
@@ -26,7 +26,7 @@ distfiles  \
     mysql-${mysql_version}.tar.gz:mysql
 
 master_sites \
-    https://github.com/downloads/mroonga/mroonga/:src \
+    http://packages.groonga.org/source/mroonga/:src \
     http://mysql.he.net/Downloads/MySQL-${mysql_version_branch}/:mysql \
     http://mirrors.sunsite.dk/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
     http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-${mysql_version_branch}/:mysql \
@@ -36,15 +36,17 @@ master_sites \
 
 checksums \
     ${distname}${extract.suffix} \
-        md5    775385ef67d4ac73da9acbecc467af18 \
-        rmd160 71a71f822ebb44d872caac6ea6192485eae4bd04 \
-        sha256 caaeb7d2e101926ebcd70577da61daed6e3aa31d810e21a97a3f7114b8ed6f78 \
+        md5    d221c5f99efb76efda1f3e068346786a \
+        rmd160 7d28eebf971aeb21baa5d431077deafd151fc168 \
+        sha256 c185c028971de57e5dd1ef7de347ff9df187b835f66e30994c99a0388deb1d30 \
     mysql-${mysql_version}.tar.gz \
         md5    da8ddb3d00e6e159153d2444360f52a8 \
         rmd160 dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
         sha256 f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f
 
 depends_lib     port:groonga port:mysql55
+
+configure.compiler  llvm-gcc-4.2
 
 configure.args  --with-mysql-source=${workpath}/mysql-${mysql_version} \
                 --with-mysql-config=${prefix}/lib/mysql55/bin/mysql_config
