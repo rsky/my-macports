@@ -1,7 +1,7 @@
 PortSystem      1.0
 
 name            leveldb
-version         1.7.0
+version         1.9.0
 license         BSD
 maintainers     openmaintainer
 platforms       darwin
@@ -15,16 +15,28 @@ homepage        http://code.google.com/p/leveldb/
 master_sites    googlecode
 
 checksums \
-    md5     5c3c6cfbb16a21cdbea0db656aa32fec \
-    rmd160  3f74de6abbdfd87f7e62584ea0f39dbf5c8b9868 \
-    sha256  ddce9a31f51d147158105240468cf1e598ff7f8f32f20eea14847bc13b7edd2e
+    md5     12f11385cb58ae0de66d4bc2cc7f8194 \
+    rmd160  6d36b6b095c131aeb24fc75ecee8a7b9b4c5ce9e \
+    sha256  b2699b04e5aba8e98382c4955b94725d1f76bd0b5decd60c5628205b717a1d4f
 
-set major_version [lindex [split ${version} .] 0]
-set minor_version [lindex [split ${version} .] 1]
+set version_array [split ${version} .]
+set major_version [lindex ${version_array} 0]
+set minor_version [lindex ${version_array} 1]
+set tiny_version  [lindex ${version_array} 2]
 
 depends_lib     port:snappy
 
-configure {}
+patchfiles      patch-Makefile.diff \
+                patch-build_detect_platform.diff
+
+patch.pre_args  -p0
+
+use_configure   no
+
+build.env       INSTALL_PATH="${prefix}/lib" \
+                SHARED_MAJOR="${major_version}" \
+                SHARED_MINOR="${minor_version}" \
+                SHARED_TINY="${tiny_version}"
 
 test.run        yes
 test.target     check
@@ -40,21 +52,9 @@ destroot {
     #install libraries
     set libdestroot ${destroot}${prefix}/lib
     xinstall -m 0755 -d ${libdestroot}
-    xinstall -m 0644 \
-        ${worksrcpath}/libleveldb.a \
-        ${libdestroot}
-    xinstall -m 0755 \
-        ${worksrcpath}/libleveldb.dylib.${major_version}.${minor_version} \
-        ${libdestroot}/libleveldb.${major_version}.${minor_version}.dylib
-    system "cd ${libdestroot} && ln -f -s \
-        libleveldb.${major_version}.${minor_version}.dylib \
-        libleveldb.${major_version}.dylib"
-    system "cd ${libdestroot} && ln -f -s \
-        libleveldb.${major_version}.${minor_version}.dylib \
-        libleveldb.dylib"
-    system "install_name_tool \
-        -id ${prefix}/lib/libleveldb.${major_version}.dylib \
-        ${libdestroot}/libleveldb.${major_version}.dylib"
+    foreach f [glob ${worksrcpath}/libleveldb.*] {
+        file copy ${f} ${libdestroot}
+    }
 
     # install documents
     set docdestroot ${destroot}${prefix}/share/doc/${name}
