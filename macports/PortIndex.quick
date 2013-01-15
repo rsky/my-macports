@@ -40,6 +40,6 @@ py25-supervisor 22207
 py26-supervisor 22768
 py27-supervisor 23329
 zsh 23890
-opt-php-fpm 24637
-opt-php53-fpm 24993
-opt-php54-fpm 25314
+opt-php-fpm 24629
+opt-php53-fpm 24985
+opt-php54-fpm 25306
