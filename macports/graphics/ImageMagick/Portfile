@@ -8,7 +8,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.1-10
+version                     6.8.2-1
 revision                    0
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   sha256  7d7ecdf17186f01fc1af161c6a07e589a5eab969e4978f43fb6204129a93301e
+checksums                   sha256  d384811b7f7f8df4acb2b2d292553b36b25a57433ba577354d7056f8148084b8
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
@@ -238,4 +238,4 @@ variant wmf description {Support the Windows Metafile Format} {
 
 livecheck.type              regex
 livecheck.url               http://www.imagemagick.org/download/
-livecheck.regex             ${name}-(\\d+(?:\\.\\d+)*-\\d+)\\.
+livecheck.regex             "${name}-(\\d+(?:\\.\\d+)*-\\d+)"
