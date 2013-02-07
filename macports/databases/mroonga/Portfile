@@ -82,7 +82,6 @@ subport mysql55-mroonga {
             delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
         }
     }
-    default_variants +doc
 }
 
 subport mysql56-mroonga {
@@ -108,7 +107,6 @@ subport mysql56-mroonga {
             delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
         }
     }
-    default_variants +doc
 }
 
 subport mariadb-mroonga {
@@ -137,7 +135,6 @@ subport mariadb-mroonga {
             delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
         }
     }
-    default_variants +doc
 }
 
 subport percona-mroonga {
@@ -157,7 +154,6 @@ subport percona-mroonga {
             delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
         }
     }
-    default_variants +doc
 }
 
 if {$name == $subport} {
