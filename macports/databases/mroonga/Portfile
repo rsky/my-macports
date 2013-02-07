@@ -1,0 +1,108 @@
+PortSystem          1.0
+
+name                mroonga
+version             2.10
+
+set mysql55_version 5.5.28
+set mysql56_version 5.6.10
+set revision_mysql55    1
+set revision_mysql56    0
+
+categories-append   textproc
+license             LGPL-2.1
+maintainers         openmaintainer
+
+description     Fast fulltext search on MySQL
+long_description \
+   Mroonga is a storage engine for MySQL. \
+   It provides fast fulltext search feature to all MySQL users. \
+   Mroonga was called groonga storage engine.
+
+homepage        http://mroonga.github.com/
+distname        mroonga-${version}
+worksrcdir      ${distname}
+distfiles       ${distname}${extract.suffix}:mroonga
+
+master_sites \
+    http://packages.groonga.org/source/mroonga/:mroonga \
+    http://cdn.mysql.com/Downloads/MySQL-5.5/:mysql55 \
+    http://cdn.mysql.com/Downloads/MySQL-5.6/:mysql56 \
+    http://mysql.he.net/Downloads/MySQL-5.5/:mysql55 \
+    http://mirrors.sunsite.dk/mysql/Downloads/MySQL-5.5/:mysql55 \
+    http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-5.5/:mysql55 \
+    http://mirror.facebook.net/mysql/Downloads/MySQL-5.5/:mysql55 \
+    http://ftp.plusline.de/mysql/Downloads/MySQL-5.5/:mysql55 \
+    http://mysql.mirrors.pair.com/Downloads/MySQL-5.5/:mysql55 \
+    http://mysql.he.net/Downloads/MySQL-5.6/:mysql56 \
+    http://mirrors.sunsite.dk/mysql/Downloads/MySQL-5.6/:mysql56 \
+    http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-5.6/:mysql56 \
+    http://mirror.facebook.net/mysql/Downloads/MySQL-5.6/:mysql56 \
+    http://ftp.plusline.de/mysql/Downloads/MySQL-5.6/:mysql56 \
+    http://mysql.mirrors.pair.com/Downloads/MySQL-5.6/:mysql56
+
+checksums \
+    ${distname}${extract.suffix} \
+        rmd160 7d28eebf971aeb21baa5d431077deafd151fc168 \
+        sha256 c185c028971de57e5dd1ef7de347ff9df187b835f66e30994c99a0388deb1d30 \
+    mysql-${mysql55_version}.tar.gz \
+        rmd160 dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
+        sha256 f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f \
+    mysql-${mysql56_version}.tar.gz \
+        rmd160 b90ec96435ec9cdb61c8c7f8d0c1c8b1f45b0919 \
+        sha256 156c43a7bde1ada8552938c6b8f46162b568bca8ddb76998a645308d93fb70b6
+
+depends_lib     port:groonga
+
+configure.compiler  llvm-gcc-4.2
+
+subport mysql55-mroonga {
+    revision    ${revision_mysql55}
+    depends_lib-append  port:mysql55
+    distfiles-append    mysql-${mysql55_version}.tar.gz:mysql55
+    configure.args      --with-mysql-source=${workpath}/mysql-${mysql55_version} \
+                        --with-mysql-config=${prefix}/lib/mysql55/bin/mysql_config
+    variant doc description {Install man page and documentation} {
+    }
+    post-destroot {
+        if {![variant_isset doc]} {
+            delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
+        }
+    }
+    default_variants +doc
+}
+
+subport mysql56-mroonga {
+    revision    ${revision_mysql56}
+    depends_lib-append  port:mysql56
+    distfiles-append    mysql-${mysql56_version}.tar.gz:mysql56
+    configure.args      --with-mysql-source=${workpath}/mysql-${mysql56_version} \
+                        --with-mysql-config=${prefix}/lib/mysql56/bin/mysql_config
+    variant doc description {Install man page and documentation} {
+    }
+    post-destroot {
+        if {![variant_isset doc]} {
+            delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
+        }
+    }
+    default_variants +doc
+}
+
+if {$subport == $name} {
+    configure {
+        ui_warn "mroonga is a virtual port"
+        return -code error "try mysql55-mroonga or mysql56-mroonga"
+    }
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex {Mroonga ([0-9.]+) has}
+
+# Local Variables:
+# coding: utf-8
+# mode: tcl
+# tab-width: 4
+# indent-tabs-mode: nil
+# c-basic-offset: 4
+# End:
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
