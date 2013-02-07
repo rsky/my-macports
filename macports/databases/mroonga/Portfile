@@ -33,17 +33,22 @@ distfiles       ${distname}${extract.suffix}:mroonga
 
 master_sites    http://packages.groonga.org/source/mroonga/:mroonga
 
+set distname_mysql55    mysql-${version_mysql55}
+set distname_mysql56    mysql-${version_mysql56}
+set distname_mariadb    mariadb-${version_mariadb}
+set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
+
 checksums \
     ${distname}${extract.suffix} \
         rmd160  7d28eebf971aeb21baa5d431077deafd151fc168 \
         sha256  c185c028971de57e5dd1ef7de347ff9df187b835f66e30994c99a0388deb1d30 \
-    mysql-${version_mysql55}.tar.gz \
+    ${distname_mysql55}${extract.suffix} \
         rmd160  dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
         sha256  f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f \
-    mysql-${version_mysql56}.tar.gz \
+    ${distname_mysql56}${extract.suffix} \
         rmd160  b90ec96435ec9cdb61c8c7f8d0c1c8b1f45b0919 \
         sha256  156c43a7bde1ada8552938c6b8f46162b568bca8ddb76998a645308d93fb70b6 \
-    mariadb-${version_mariadb}.tar.gz \
+    ${distname_mariadb}${extract.suffix} \
         rmd160  f2967e11b174866c1077cc197e98eb23c3a278d2 \
         sha256  66c908592763c641f2a1e9fd83f080458a0d3375cda9aaf7700a37877b1e9968 \
     Percona-Server-${version_percona}-rel${release_percona}.tar.gz \
@@ -57,7 +62,7 @@ configure.compiler  llvm-gcc-4.2
 subport mysql55-mroonga {
     revision            ${revision_mysql55}
     depends_lib-append  port:mysql55
-    distfiles-append    mysql-${version_mysql55}.tar.gz:mysql
+    distfiles-append    ${distname_mysql55}${extract.suffix}:mysql
     master_sites-append \
         http://cdn.mysql.com/Downloads/MySQL-5.5/:mysql \
         http://mysql.he.net/Downloads/MySQL-5.5/:mysql \
@@ -68,7 +73,7 @@ subport mysql55-mroonga {
         http://mysql.mirrors.pair.com/Downloads/MySQL-5.5/:mysql
 
     configure.args \
-        --with-mysql-source=${workpath}/mysql-${version_mysql55} \
+        --with-mysql-source=${workpath}/${distname_mysql55} \
         --with-mysql-config=${prefix}/lib/mysql55/bin/mysql_config
 
     variant doc description {Install man page and documentation} {}
@@ -83,7 +88,7 @@ subport mysql55-mroonga {
 subport mysql56-mroonga {
     revision            ${revision_mysql56}
     depends_lib-append  port:mysql56
-    distfiles-append    mysql-${version_mysql56}.tar.gz:mysql
+    distfiles-append    ${distname_mysql56}${extract.suffix}:mysql
     master_sites-append \
         http://cdn.mysql.com/Downloads/MySQL-5.6/:mysql \
         http://mysql.he.net/Downloads/MySQL-5.6/:mysql \
@@ -94,7 +99,7 @@ subport mysql56-mroonga {
         http://mysql.mirrors.pair.com/Downloads/MySQL-5.6/:mysql
 
     configure.args \
-        --with-mysql-source=${workpath}/mysql-${version_mysql56} \
+        --with-mysql-source=${workpath}/${distname_mysql56} \
         --with-mysql-config=${prefix}/lib/mysql56/bin/mysql_config
 
     variant doc description {Install man page and documentation} {}
@@ -109,21 +114,21 @@ subport mysql56-mroonga {
 subport mariadb-mroonga {
     revision            ${revision_mariadb}
     depends_lib-append  port:mariadb
-    distfiles-append    mariadb-${version_mariadb}.tar.gz:mariadb
+    distfiles-append    ${distname_mariadb}${extract.suffix}:mariadb
     master_sites-append \
-        http://ftp.osuosl.org/pub/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror2.hs-esslingen.de/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror3.layerjet.com/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://ftp.yz.yamagata-u.ac.jp/pub/dbms/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirrors.supportex.net/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror.switch.ch/mirror/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirrors.fe.up.pt/pub/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://gd.tuwien.ac.at/db/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror.aarnet.edu.au/pub/MariaDB/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://ftp.heanet.ie/mirrors/mariadb/mariadb-${version_mariadb}/kvm-tarbake-jaunty-x86/:mariadb
+        http://ftp.osuosl.org/pub/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirror2.hs-esslingen.de/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirror3.layerjet.com/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://ftp.yz.yamagata-u.ac.jp/pub/dbms/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirrors.supportex.net/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirror.switch.ch/mirror/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirrors.fe.up.pt/pub/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://gd.tuwien.ac.at/db/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://mirror.aarnet.edu.au/pub/MariaDB/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
+        http://ftp.heanet.ie/mirrors/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb
 
     configure.args \
-        --with-mysql-source=${workpath}/mariadb-${version_mariadb} \
+        --with-mysql-source=${workpath}/${distname_mariadb} \
         --with-mysql-config=${prefix}/lib/mariadb/bin/mysql_config
 
     variant doc description {Install man page and documentation} {}
@@ -136,10 +141,9 @@ subport mariadb-mroonga {
 }
 
 subport percona-mroonga {
-    set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
     revision            ${revision_percona}
     depends_lib-append  port:percona
-    distfiles-append    ${distname_percona}.tar.gz:percona
+    distfiles-append    ${distname_percona}${extract.suffix}:percona
     master_sites-append \
         http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-${version_percona}-${release_percona}/source/:percona
 
