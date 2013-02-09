@@ -1,10 +1,10 @@
 PortSystem          1.0
 
 name                mroonga
-version             2.10
+version             3.00
 
 set version_mysql55     5.5.28
-set revision_mysql55    1
+set revision_mysql55    0
 
 set version_mysql56     5.6.10
 set revision_mysql56    0
@@ -40,8 +40,8 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  7d28eebf971aeb21baa5d431077deafd151fc168 \
-        sha256  c185c028971de57e5dd1ef7de347ff9df187b835f66e30994c99a0388deb1d30 \
+        rmd160  fe391c46ff11672dfb8e1abb80a4d3aca067c354 \
+        sha256  22cf11735c0247a0ff4cceed0df97d1f299ce4f916fb990826e1decc586ac4d2 \
     ${distname_mysql55}${extract.suffix} \
         rmd160  dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
         sha256  f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f \
@@ -51,7 +51,7 @@ checksums \
     ${distname_mariadb}${extract.suffix} \
         rmd160  f2967e11b174866c1077cc197e98eb23c3a278d2 \
         sha256  66c908592763c641f2a1e9fd83f080458a0d3375cda9aaf7700a37877b1e9968 \
-    Percona-Server-${version_percona}-rel${release_percona}.tar.gz \
+    ${distname_percona}${extract.suffix} \
         rmd160  f0247025b7ec4d8e1ec551588e8643aa325f5d9b \
         sha256  4ba9e3300d99bfdbf65dd1a00e51da5bddc1582e33a58219b5184075783889ce \
 
