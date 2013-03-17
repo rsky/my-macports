@@ -14,7 +14,6 @@ long_description \
 
 homepage        http://pypi.python.org/pypi/medusa/
 master_sites    http://pypi.python.org/packages/source/m/medusa/
-dist_subdir     python
 distname        medusa-${version}
 checksums \
     md5    5d10505036bc38f8d4cb51d87516e069 \

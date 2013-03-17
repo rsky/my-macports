@@ -19,7 +19,6 @@ long_description \
 homepage        http://s3tools.org/s3cmd \
                 http://pypi.python.org/pypi/s3cmd/
 master_sites    http://pypi.python.org/packages/source/s/s3cmd/
-dist_subdir     python
 distname        s3cmd-${version}
 checksums \
     md5    ff76d6f266342598e849dd2acd8500db \

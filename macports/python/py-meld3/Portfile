@@ -17,7 +17,6 @@ homepage        http://www.plope.com/software/meld3/ \
                 http://pypi.python.org/pypi/meld3/
 master_sites    http://pypi.python.org/packages/source/m/meld3/ \
                 http://www.plope.com/software/meld3/
-dist_subdir     python
 distname        meld3-${version}
 checksums \
     md5    42e58624e9d427be7659d7a28e2b0b6f \
