@@ -8,7 +8,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.3-9
+version                     6.8.3-10
 revision                    0
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   sha256  384acd68d318db115536d60c4d849f5f8d5ab1506976d66f7f8ad56a68f225f8
+checksums                   sha256  d029c0ab00282a8ba7d9485ffa62389d9c641711b51a09510a6f1836fa3697b9
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
@@ -68,17 +68,18 @@ depends_run                 port:urw-fonts
 archcheck.files             lib/libXext.dylib \
                             lib/libXt.dylib \
                             lib/libbz2.dylib \
+                            lib/libexpat.dylib \
+                            lib/libfftw3.dylib \
+                            lib/libfontconfig.dylib \
+                            lib/libfreetype.dylib \
+                            lib/libgs.dylib \
+                            lib/libiconv.dylib \
                             lib/libjpeg.dylib \
                             lib/liblcms2.dylib \
+                            lib/libltdl.dylib \
                             lib/libpng.dylib \
                             lib/libtiff.dylib \
                             lib/libwebp.dylib \
-                            lib/libfreetype.dylib \
-                            lib/libfontconfig.dylib \
-                            lib/libgs.dylib \
-                            lib/libiconv.dylib \
-                            lib/libltdl.dylib \
-                            lib/libexpat.dylib \
                             lib/libxml2.dylib
 
 # On case-insensitive filesystems, ImageMagick finds cryptlib's libcl and
@@ -91,14 +92,16 @@ configure.ccache            no
 
 configure.args              --enable-shared \
                             --enable-static \
+                            --disable-hdri \
                             --disable-ltdl-install \
                             --with-frozenpaths \
-                            --without-openexr \
-                            --disable-hdri \
-                            --with-dps \
                             --with-bzlib \
+                            --with-dps \
+                            --with-fftw \
                             --with-fontconfig \
+                            --with-freetype \
                             --with-gslib \
+                            --with-gs-font-dir=${prefix}/share/fonts/urw-fonts \
                             --with-jpeg \
                             --with-lcms \
                             --with-png \
@@ -106,18 +109,18 @@ configure.args              --enable-shared \
                             --with-webp \
                             --with-zlib \
                             --with-modules \
-                            --with-xml \
                             --with-x \
-                            --without-perl \
+                            --with-xml \
                             --without-fpx \
+                            --without-gvc \
                             --without-jbig \
                             --without-jp2 \
-                            --without-wmf \
-                            --without-gvc \
-                            --without-rsvg \
                             --without-lqr \
+                            --without-openexr \
                             --without-pango \
-                            --with-gs-font-dir=${prefix}/share/fonts/urw-fonts
+                            --without-perl \
+                            --without-rsvg \
+                            --without-wmf
 
 test.run                    yes
 test.target                 check
