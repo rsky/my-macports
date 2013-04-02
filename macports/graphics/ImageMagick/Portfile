@@ -8,7 +8,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.4-3
+version                     6.8.4-6
 revision                    0
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   sha256  361b196fffe09ddeb9890e6fdb0812b58d739fca2e1f4a85550dc69e50a66173
+checksums                   sha256  af1c2c4363a4b2b637f5ff9c788306f6a882f546e2a1a8b27a63ccc48a7e2334
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
