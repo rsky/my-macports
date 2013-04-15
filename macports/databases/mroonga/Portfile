@@ -26,7 +26,7 @@ long_description \
    It provides fast fulltext search feature to all MySQL users. \
    Mroonga was called groonga storage engine.
 
-homepage        http://mroonga.github.com/
+homepage        http://mroonga.github.io/
 distname        mroonga-${version}
 worksrcdir      ${distname}
 distfiles       ${distname}${extract.suffix}:mroonga
