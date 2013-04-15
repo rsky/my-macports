@@ -34,23 +34,23 @@ def read_version(portfile):
 
     return LooseVersion(version + '_' + revision)
 
-def compare_version(name, default_portfile, private_portfile):
-    default_version = read_version(default_portfile)
+def compare_version(name, private_portfile, default_portfile):
     private_version = read_version(private_portfile)
+    default_version = read_version(default_portfile)
 
     params = {
         'name': name,
-        'd_version': default_version,
         'p_version': private_version,
+        'd_version': default_version,
         'sign': '=',
     }
 
-    if default_version > private_version:
+    if private_version > default_version:
         params['sign'] = '>'
-    elif default_version < private_version:
+    elif private_version < default_version:
         params['sign'] = '<'
 
-    print '%(name)s (%(d_version)s %(sign)s %(p_version)s)' % params
+    print '%(name)s (%(p_version)s %(sign)s %(d_version)s)' % params
 
 def main():
     portfiles = glob(path.join(private_ports_dir, '*', '*', 'Portfile'))
@@ -60,12 +60,12 @@ def main():
         components = portfile.split(path.sep)
         default_portfile = path.join(default_ports_dir, *components[-3:])
         if path.exists(default_portfile):
-            ports.append((components[-2], default_portfile, portfile))
+            ports.append((components[-2], portfile, default_portfile))
 
     ports.sort()
 
-    for name, default_portfile, private_portfile in ports:
-        compare_version(name, default_portfile, private_portfile)
+    for name, private_portfile, default_portfile in ports:
+        compare_version(name, private_portfile, default_portfile)
 
 if __name__ == '__main__':
     main()
