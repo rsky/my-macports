@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                mroonga
-version             3.01
+version             3.02
 
 set version_mysql55     5.5.30
 set revision_mysql55    0
@@ -40,8 +40,8 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  ade737ed7f5060545c887cdb07d3126fccf93ac1 \
-        sha256  1216f40c85322486f95c44af637878432ce9e56ca38f05560e51715df1173a1d \
+        rmd160  6db744da959dbae7fd93615f6b7c0790adc8f593 \
+        sha256  f8411d1648a7af262a1e87a813d9386fa3c8a3e99a081f699a054933877736e5 \
     ${distname_mysql55}${extract.suffix} \
         rmd160  6d93cf458a732e63e6d2b3939051233bcd0dea0a \
         sha256  909fe596e0044082a02d2757b742a33b8a3ff399b589603940494d3d3d975053 \
