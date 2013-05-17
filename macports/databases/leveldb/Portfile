@@ -1,7 +1,10 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
 PortSystem      1.0
 
 name            leveldb
-version         1.9.0
+version         1.10.0
 license         BSD
 maintainers     openmaintainer
 platforms       darwin
@@ -15,9 +18,8 @@ homepage        http://code.google.com/p/leveldb/
 master_sites    googlecode
 
 checksums \
-    md5     12f11385cb58ae0de66d4bc2cc7f8194 \
-    rmd160  6d36b6b095c131aeb24fc75ecee8a7b9b4c5ce9e \
-    sha256  b2699b04e5aba8e98382c4955b94725d1f76bd0b5decd60c5628205b717a1d4f
+    rmd160  b821bcbcd36201d5cc89775c51e25e0d917645df \
+    sha256  84a4ab34671e1271d895f093932f8c8cfecb45b2e085da738671599825d12f62
 
 set version_array [split ${version} .]
 set major_version [lindex ${version_array} 0]
@@ -71,12 +73,3 @@ destroot {
 livecheck.type  regex
 livecheck.url   http://code.google.com/p/leveldb/downloads/list
 livecheck.regex {leveldb-([0-9]+\.[0-9]+\.[0-9]+)\.}
-
-# Local Variables:
-# coding: utf-8
-# mode: tcl
-# tab-width: 4
-# indent-tabs-mode: nil
-# c-basic-offset: 4
-# End:
-# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4

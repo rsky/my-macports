@@ -1,6 +1,6 @@
 --- build_detect_platform.orig
 +++ build_detect_platform
-@@ -73,7 +73,10 @@
+@@ -77,7 +77,10 @@
          COMMON_FLAGS="$MEMCMP_FLAG -DOS_MACOSX"
          PLATFORM_SHARED_EXT=dylib
          [ -z "$INSTALL_PATH" ] && INSTALL_PATH=`pwd`
