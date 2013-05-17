@@ -1,3 +1,5 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
 PortSystem      1.0
 
 name            opt-php-fpm
@@ -7,6 +9,7 @@ license         Public Domain
 maintainers     openmaintainer
 supported_archs noarch
 
+categories      www
 description     PHP FPM Startup Item
 long_description \
     The startup item of PHP FastCGI Process Manager installed to /opt/php
@@ -24,6 +27,11 @@ set php_prefix          /opt/php/main
 startupitem.create      yes
 startupitem.name        ${name}
 
+subport opt-php52-fpm {
+    set php_prefix      /opt/php/5.2
+    startupitem.name    ${subport}
+}
+
 subport opt-php53-fpm {
     set php_prefix      /opt/php/5.3
     startupitem.name    ${subport}
@@ -31,6 +39,11 @@ subport opt-php53-fpm {
 
 subport opt-php54-fpm {
     set php_prefix      /opt/php/5.4
+    startupitem.name    ${subport}
+}
+
+subport opt-php55-fpm {
+    set php_prefix      /opt/php/5.5
     startupitem.name    ${subport}
 }
 
@@ -44,12 +57,3 @@ startupitem.pidfile     auto ${fpm_pidfile}
 startupitem.executable  ${php_fpm_bin} --fpm-config=${fpm_config} --pid=${fpm_pidfile} --daemonize
 
 livecheck.type  none
-
-# Local Variables:
-# coding: utf-8
-# mode: tcl
-# tab-width: 4
-# indent-tabs-mode: nil
-# c-basic-offset: 4
-# End:
-# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
