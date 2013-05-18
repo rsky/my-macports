@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import re
 from glob import glob
 from os import path
@@ -50,7 +51,7 @@ def compare_version(name, private_portfile, default_portfile):
     elif private_version < default_version:
         params['sign'] = '<'
 
-    print '%(name)s (%(p_version)s %(sign)s %(d_version)s)' % params
+    print('{name} ({p_version} {sign} {d_version})'.format(**params))
 
 def main():
     portfiles = glob(path.join(private_ports_dir, '*', '*', 'Portfile'))
