@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 from __future__ import print_function
 import re, sys, subprocess
 from os import path
 
-default_ports_dir = '/opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports'
+default_ports_dir = '/opt/local' \
+    '/var/macports/sources/rsync.macports.org/release/tarballs/ports'
 private_ports_dir = path.join(path.dirname(__file__), 'macports')
 category_pattern = re.compile(r'\((\w+)')
 

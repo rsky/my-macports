@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 from __future__ import print_function
 import re
@@ -6,7 +6,8 @@ from glob import glob
 from os import path
 from distutils.version import LooseVersion
 
-default_ports_dir = '/opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports'
+default_ports_dir = '/opt/local' \
+    '/var/macports/sources/rsync.macports.org/release/tarballs/ports'
 private_ports_dir = path.join(path.dirname(__file__), 'macports')
 
 version_re = re.compile(r'^version[ \t]+([^ \t\r\n]+)')

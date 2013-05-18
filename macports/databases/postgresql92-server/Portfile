@@ -1,43 +1,45 @@
-PortSystem      1.0
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
 
-name            postgresql92-server
-version         9.2.99
-categories      databases
-platforms       darwin
-maintainers     mww jwa openmaintainer
-license         Permissive
-description     run postgresql92 as server
-long_description \
-    ${description} (without creating any user)
+PortSystem 1.0
 
-supported_archs noarch
+name			postgresql92-server
+version			9.2.99
+categories		databases
+platforms		darwin
+maintainers		mww jwa
+license			Permissive
+description		run postgresql92 as server
+long_description	${description} (without creating any user)
 
-homepage        http://www.postgresql.org/
-master_sites    postgresql
+supported_archs	noarch
 
-dist_subdir     postgresql92
-depends_run     port:postgresql92
+homepage		http://www.postgresql.org/
+master_sites		postgresql
 
-fetch {}
-checksum  {}
-extract {}
-use_configure no
-build  {}
+dist_subdir		postgresql92
+depends_run		port:postgresql92
 
-set libdir      ${prefix}/lib/postgresql92
-set dbprefix    ${prefix}/var/db/postgresql92
-set dbdir       ${dbprefix}/defaultdb
-set logdir      ${prefix}/var/log/postgresql92
-set dbuser      _postgres
-set dbgrp       _postgres
+fetch	{}
+checksum	{}
+extract	{}
+use_configure	no
+build	{}
+
+set libdir		${prefix}/lib/postgresql92
+set dbprefix	${prefix}/var/db/postgresql92
+set dbdir		${dbprefix}/defaultdb
+set logdir		${prefix}/var/log/postgresql92
+set dbuser		_postgres
+set dbgrp		_postgres
 
 startupitem.create  yes
 startupitem.init  \
-    "PGCTL=${libdir}/bin/pg_ctl"
+	"PGCTL=${libdir}/bin/pg_ctl"
 startupitem.start   \
-    "sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} start -l ${logdir}/postgres.log"
+	"sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} start -l ${logdir}/postgres.log"
 startupitem.stop    \
-    "sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} stop -s -m fast"
+	"sudo -u ${dbuser} \${PGCTL} -D \${POSTGRESQL92DATA:=${dbdir}} stop -s -m fast"
 
 destroot {
     xinstall -m 755 -o ${dbuser} -g ${dbgrp} -d \
@@ -49,22 +51,11 @@ destroot {
         ${destroot}${logdir}
 }
 
-post-install {
-    ui_msg "\nTo create a database instance, after install do\n\
-        sudo mkdir -p -m 0700 ${dbdir}\n\
-        sudo chown ${dbuser}:${dbgrp} ${dbdir}\n\
-        sudo -u ${dbuser} ${libdir}/bin/initdb -D ${dbdir}\'"
-    ui_msg "\nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
-        by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
-}
+notes "\nTo create a database instance, after install do\n\
+		sudo mkdir -p -m 0700 ${dbdir}\n\
+		sudo chown ${dbuser}:${dbgrp} ${dbdir}\n\
+		sudo -u ${dbuser} ${libdir}/bin/initdb -D ${dbdir}\'
+       \nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
+		by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
 
 livecheck.type  none
-
-# Local Variables:
-# coding: utf-8
-# mode: tcl
-# tab-width: 4
-# indent-tabs-mode: nil
-# c-basic-offset: 4
-# End:
-# vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
