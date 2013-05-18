@@ -1,6 +1,6 @@
-/macports/PortIndex
-/macports/PortIndex.quick
-/macports/*/*/work
+/ports/PortIndex
+/ports/PortIndex.quick
+/ports/*/*/work
 .DS_Store
 *.pyc
 *.pyo
