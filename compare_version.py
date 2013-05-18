@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-"""独自のportと標準のportのバージョンを比較する"""
+"""独自のportと標準のportのバージョンを比較する
+"""
 
 from __future__ import print_function
 import re
@@ -11,7 +12,8 @@ VERSION_PATTERN = re.compile(r'version[ \t]+([^ \t\r\n]+)')
 REVISION_PATTERN = re.compile(r'revision[ \t]+([^ \t\r\n]+)')
 
 def read_version(portfile):
-    """Portfileからバージョンを取得する"""
+    """Portfileからバージョンを取得する
+    """
     version = None
     revision = None
 
@@ -35,7 +37,8 @@ def read_version(portfile):
     return LooseVersion(version + '_' + revision)
 
 def compare_version(name, private_portfile, default_portfile):
-    """portのバージョンを比較・表示する"""
+    """portのバージョンを比較・表示する
+    """
     private_version = read_version(private_portfile)
     default_version = read_version(default_portfile)
     sign = '='
@@ -50,7 +53,8 @@ def compare_version(name, private_portfile, default_portfile):
             pv=private_version, dv=default_version))
 
 def main():
-    """main"""
+    """main
+    """
     for name, private_portfile, default_portfile in find_common_ports():
         compare_version(name, private_portfile, default_portfile)
 

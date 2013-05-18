@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-"""独自のPortfileと標準のPortfileの差分を取る"""
+"""独自のPortfileと標準のPortfileの差分を取る
+"""
 
 from __future__ import print_function
 import os, sys, subprocess
@@ -8,7 +9,8 @@ from myportutil import util
 from myportutil.path import DEFAULT_PORTS_DIR, PRIVATE_PORTS_DIR
 
 def diff(port, category=None, diff_cmd='diff'):
-    """指定したportのPortfileの差分を取る"""
+    """指定したportのPortfileの差分を取る
+    """
     if category is None:
         category = util.get_category(port)
         if category is None:
@@ -29,7 +31,8 @@ def diff(port, category=None, diff_cmd='diff'):
     subprocess.call([diff_cmd, '-u', default_portfile, private_portfile])
 
 def main():
-    """main"""
+    """main
+    """
     diff_cmd = 'diff'
     if sys.stdout.isatty():
         diff_cmd = 'colordiff'
