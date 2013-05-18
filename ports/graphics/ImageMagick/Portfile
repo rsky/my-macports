@@ -61,17 +61,16 @@ depends_lib                 port:bzip2 \
 depends_lib-append          port:pkgconfig
 
 archcheck.files             lib/libbz2.dylib \
-                            lib/libexpat.dylib \
-                            lib/libfftw3.dylib \
-                            lib/libfontconfig.dylib \
-                            lib/libfreetype.dylib \
-                            lib/libiconv.dylib \
                             lib/libjpeg.dylib \
                             lib/liblcms2.dylib \
-                            lib/libltdl.dylib \
                             lib/libpng.dylib \
                             lib/libtiff.dylib \
                             lib/libwebp.dylib \
+                            lib/libfreetype.dylib \
+                            lib/libfontconfig.dylib \
+                            lib/libiconv.dylib \
+                            lib/libltdl.dylib \
+                            lib/libexpat.dylib \
                             lib/libxml2.dylib
 
 # On case-insensitive filesystems, ImageMagick finds cryptlib's libcl and
@@ -84,14 +83,14 @@ configure.ccache            no
 
 configure.args              --enable-shared \
                             --enable-static \
-                            --disable-hdri \
                             --disable-ltdl-install \
+                            --disable-silent-rules \
                             --with-frozenpaths \
-                            --with-bzlib \
+                            --without-openexr \
+                            --disable-hdri \
                             --with-dps \
-                            --with-fftw \
+                            --with-bzlib \
                             --with-fontconfig \
-                            --with-freetype \
                             --with-jpeg \
                             --with-lcms \
                             --with-png \
@@ -100,18 +99,17 @@ configure.args              --enable-shared \
                             --with-zlib \
                             --with-modules \
                             --with-xml \
+                            --without-perl \
                             --without-fpx \
-                            --without-gvc \
-                            --without-gslib \
                             --without-jbig \
                             --without-jp2 \
-                            --without-lqr \
-                            --without-openexr \
-                            --without-pango \
-                            --without-perl \
-                            --without-rsvg \
                             --without-wmf \
-                            --without-x
+                            --without-gvc \
+                            --without-rsvg \
+                            --without-lqr \
+                            --without-pango \
+                            --without-x \
+                            --without-gslib
 
 test.run                    yes
 test.target                 check
@@ -122,15 +120,6 @@ variant graphviz description {Support Graphviz} {
     archcheck.files-append  lib/libgvc.dylib
     configure.args-delete   --without-gvc
     configure.args-append   --with-gvc
-}
-
-variant hdri description {Support High Dynamic Range Imaging using OpenEXR} {
-    depends_lib-append      port:openexr
-    archcheck.files-append  lib/libIlmImf.dylib
-    configure.args-delete   --without-openexr \
-                            --disable-hdri
-    configure.args-append   --with-openexr \
-                            --enable-hdri
 }
 
 variant jbig description {Support JBIG} {
@@ -161,10 +150,6 @@ variant pango description {Support Pango} {
     configure.args-append   --with-pango
 }
 
-variant mpeg description {Support MPEG-1 and MPEG-2 video} {
-    depends_lib-append      port:mpeg2vidcodec
-}
-
 variant ghostscript {
     depends_run-append      port:urw-fonts
     depends_lib-append      port:ghostscript
@@ -181,19 +166,6 @@ variant perl description {Obsolete variant} {
     }
 }
 
-variant q8 conflicts q16 q32 description {Use 8 bits per pixel quantum} {
-    configure.args-append   --with-quantum-depth=8
-}
-variant q16 conflicts q8 q32 description {Use 16 bits per pixel quantum} {
-    configure.args-append   --with-quantum-depth=16
-}
-variant q32 conflicts q8 q16 description {Use 32 bits per pixel quantum} {
-    configure.args-append   --with-quantum-depth=32
-}
-if {![variant_isset q8] && ![variant_isset q32]} {
-    default_variants +q16
-}
-
 variant rsvg description {Support SVG using librsvg} {
     depends_lib-append      port:librsvg
     archcheck.files-append  lib/librsvg-2.dylib
@@ -208,22 +180,13 @@ variant wmf description {Support the Windows Metafile Format} {
     configure.args-append   --with-wmf
 }
 
-# Legacy no_x11 variant to be removed after May 2014.
-variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
-
-variant x11 conflicts no_x11 {
+variant x11 description {Support X11} {
     depends_lib-append      port:xorg-libXext \
                             port:xorg-libXt
     archcheck.files-append  lib/libXext.dylib \
                             lib/libXt.dylib
     configure.args-append   --with-x
     configure.args-delete   --without-x
-}
-
-if {[variant_isset no_x11]} {
-    default_variants -x11
-} else {
-    default_variants +x11
 }
 
 livecheck.type              regex
