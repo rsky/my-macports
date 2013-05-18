@@ -1,12 +1,9 @@
 #!/usr/bin/env python2.7
 
 from __future__ import print_function
-import re, sys, subprocess
-from os import path
+import os, re, sys, subprocess
+from myportutil.path import default_ports_dir, private_ports_dir
 
-default_ports_dir = '/opt/local' \
-    '/var/macports/sources/rsync.macports.org/release/tarballs/ports'
-private_ports_dir = path.join(path.dirname(__file__), 'macports')
 category_pattern = re.compile(r'\((\w+)')
 
 def get_category(port):
@@ -26,10 +23,10 @@ def diff(port, diff_cmd='diff'):
     if not category:
         return
 
-    default_port = path.join(default_ports_dir, category, port, 'Portfile')
-    private_port = path.join(private_ports_dir, category, port, 'Portfile')
+    default_port = os.path.join(default_ports_dir, category, port, 'Portfile')
+    private_port = os.path.join(private_ports_dir, category, port, 'Portfile')
     for port in (default_port, private_port):
-        if not path.exists(port):
+        if not os.path.exists(port):
             print(port, 'does not exist.', file=sys.stderr)
             return
 
