@@ -1,7 +1,12 @@
 #!python
+# -*- coding: utf-8 -*-
+"""パス定数を定義する"""
+
 import os
-default_ports_dir = '/opt/local' \
+
+DEFAULT_PORTS_DIR = '/opt/local' \
     '/var/macports/sources' \
     '/rsync.macports.org/release/tarballs/ports'
-private_ports_dir = os.path.abspath(
+
+PRIVATE_PORTS_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..', 'ports'))

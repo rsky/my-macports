@@ -1,25 +1,27 @@
 #!/usr/bin/env python2.7
+# -*- coding: utf-8 -*-
+"""独自のportと標準のportのバージョンを比較する"""
 
 from __future__ import print_function
-import os, re
-from glob import glob
+import re
 from distutils.version import LooseVersion
-from myportutil.path import default_ports_dir, private_ports_dir
+from myportutil.util import find_common_ports
 
-version_pattern = re.compile(r'version[ \t]+([^ \t\r\n]+)')
-revision_pattern = re.compile(r'revision[ \t]+([^ \t\r\n]+)')
+VERSION_PATTERN = re.compile(r'version[ \t]+([^ \t\r\n]+)')
+REVISION_PATTERN = re.compile(r'revision[ \t]+([^ \t\r\n]+)')
 
 def read_version(portfile):
+    """Portfileからバージョンを取得する"""
     version = None
     revision = None
 
     for line in open(portfile, 'r'):
         if version is None:
-            match = version_pattern.match(line)
+            match = VERSION_PATTERN.match(line)
             if match is not None:
                 version = match.group(1)
         elif revision is None:
-            match = revision_pattern.match(line)
+            match = REVISION_PATTERN.match(line)
             if match is not None:
                 revision = match.group(1)
         else:
@@ -33,36 +35,23 @@ def read_version(portfile):
     return LooseVersion(version + '_' + revision)
 
 def compare_version(name, private_portfile, default_portfile):
+    """portのバージョンを比較・表示する"""
     private_version = read_version(private_portfile)
     default_version = read_version(default_portfile)
-
-    params = {
-        'name': name,
-        'p_version': private_version,
-        'd_version': default_version,
-        'sign': '=',
-    }
+    sign = '='
 
     if private_version > default_version:
-        params['sign'] = '>'
+        sign = '>'
     elif private_version < default_version:
-        params['sign'] = '<'
+        sign = '<'
 
-    print('{name} ({p_version} {sign} {d_version})'.format(**params))
+    print('{name} ({pv} {sign} {dv})'.format(
+            name=name, sign=sign,
+            pv=private_version, dv=default_version))
 
 def main():
-    portfiles = glob(os.path.join(private_ports_dir, '*', '*', 'Portfile'))
-    ports = []
-
-    for portfile in portfiles:
-        components = portfile.split(os.path.sep)
-        default_portfile = os.path.join(default_ports_dir, *components[-3:])
-        if os.path.exists(default_portfile):
-            ports.append((components[-2], portfile, default_portfile))
-
-    ports.sort()
-
-    for name, private_portfile, default_portfile in ports:
+    """main"""
+    for name, private_portfile, default_portfile in find_common_ports():
         compare_version(name, private_portfile, default_portfile)
 
 if __name__ == '__main__':
