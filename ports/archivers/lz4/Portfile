@@ -23,12 +23,13 @@ long_description \
 homepage            http://code.google.com/p/lz4/
 fetch.type          svn
 svn.url             http://lz4.googlecode.com/svn/trunk
-worksrcdir          trunk
+worksrcdir          trunk/cmake
 use_parallel_build  no
 
 patchfiles          patch-cmake-CMakeLists.txt.diff
+patch.pre_args      -p1
 
-configure.cmd       cmake ./cmake -DBUILD_SHARED_LIBS=yes
+configure.args-append -DBUILD_SHARED_LIBS:BOOL=ON
 
 livecheck.type      regex
 livecheck.url       ${homepage}
