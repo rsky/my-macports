@@ -6,7 +6,7 @@ PortGroup           cmake 1.0
 
 name                lz4
 categories          archivers
-svn.revision        95
+svn.revision        96
 version             r${svn.revision}
 revision            0
 license             New BSD
@@ -29,7 +29,7 @@ use_parallel_build  no
 patchfiles          patch-cmake-CMakeLists.txt.diff
 patch.pre_args      -p1
 
-configure.args-append -DBUILD_SHARED_LIBS:BOOL=ON
+configure.args-append   -DBUILD_SHARED_LIBS:BOOL=ON
 
 livecheck.type      regex
 livecheck.url       ${homepage}
