@@ -5,8 +5,8 @@ PortSystem      1.0
 PortGroup       python 1.0
 
 name            py-supervisor
-version         3.0b1
-revision        2
+version         3.0b2
+revision        0
 categories-append   sysutils
 license         ZPL
 maintainers     openmaintainer
@@ -22,9 +22,8 @@ homepage        http://supervisord.org/ \
 master_sites    http://pypi.python.org/packages/source/s/supervisor/
 distname        supervisor-${version}
 checksums \
-    md5    5a2f1bb052bb2bbfd6d69ba8b1e1dad7 \
-    rmd160 79ba6f3ee033b583f003443288d95e6e4d62b04d \
-    sha256 7361e224871257534cac3bc035e90571c35b9fa9245ec46207de9d89191a7d0c
+    rmd160 17b889ded65af245aac711c1a8341e1c2476a2b2 \
+    sha256 3cb0e1d8ce4e4feb8c27923ca996ad7ba725f9d6300b8f8dfd2dbac4998575ed
 
 python.versions 24 25 26 27
 python.default_version 27
