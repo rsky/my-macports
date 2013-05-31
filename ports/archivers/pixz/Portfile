@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       cmake 1.0
+
+name            pixz
+categories      archivers
+version         1.0.2
+revision        0
+license         BSD 2-Clause
+maintainers     openmaintainer
+
+description     parallel, indexing version of XZ
+long_description \
+   Pixz (pronounced 'pixie') is a parallel, indexing version of XZ
+
+homepage        https://github.com/vasi/pixz
+
+extract.suffix  .tgz
+master_sites    sourceforge
+checksums \
+    rmd160  e9aa82f0f72b786d5ea07e8d9bdd88f10ef30f06 \
+    sha256  af9dac41edd6bf57953471f7fcbd4793810003bf911593ba4c84f7cccb5f74af
+
+depends_lib     port:xz port:libarchive
+
+post-extract {
+    copy ${filespath}/CMakeLists.txt.in ${worksrcpath}/CMakeLists.txt
+    reinplace "s|%VERSION%|${version}|g" ${worksrcpath}/CMakeLists.txt
+}
+
+livecheck.type  regex
+livecheck.url   http://sourceforge.net/projects/pixz/files/
+livecheck.regex {pixz-([0-9.]+)\.t}
