@@ -4,11 +4,11 @@
 PortSystem      1.0
 
 name            jemalloc
-version         3.3.1
+categories      devel
+version         3.4.0
 revision        0
 license         BSD
 maintainers     openmaintainer
-platforms       darwin
 
 description     a general-purpose scalable concurrent malloc(3) implementation
 long_description \
@@ -20,9 +20,8 @@ master_sites    http://www.canonware.com/download/jemalloc/
 use_bzip2       yes
 
 checksums \
-    md5    a899c330f6cd69e150bfe7bca276a291 \
-    rmd160 9da16771a409e15b2b0575292d6fae3f5aa48288 \
-    sha256 35c433cc1df5cdf9eb58b7980338552fc1d7aa64f89fe5643a972ccedb7cf20a
+    rmd160  0dff4489050da252d22dc30b2b3cff5b023bffb6 \
+    sha256  f60802c4c2c60bc24598fd052494aea96f4426f3d4decd832eadeed520ff81c0
 
 depends_build   port:libxslt
 
