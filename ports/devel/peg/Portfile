@@ -2,13 +2,14 @@
 # $Id$
 
 PortSystem      1.0
+PortGroup       cmake 1.0
 
-name            peg-leg
-version         0.1.9
+name            peg
+categories      devel
+version         0.1.11
 revision        0
 license         MIT
 maintainers     openmaintainer
-platforms       darwin
 
 description     recursive-descent parser generators for C
 long_description \
@@ -20,24 +21,20 @@ long_description \
 homepage        http://piumarta.com/software/peg/
 master_sites    ${homepage}
 
-distname        peg-${version}
 checksums \
-    md5    26888aff55d5578b8eb2b3f42c4ed587 \
-    rmd160 1be1739e0e1862dfcaa74176e16ae4a97aadd290 \
-    sha256 81d9299f3ee9e12b78c993529185645edd4475f5da271bff65b13c61d776708f
+    rmd160  f23f78c8f6844321958ae6814262ffaa8b83e9d6 \
+    sha256  7b2928fcb551ebe40ee2b3b77d030857967d373437192258ce0f42caa309af8a
 
-use_configure   no
-
-pre-build {
-    reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile
+post-extract {
+    copy ${filespath}/CMakeLists.txt.in ${worksrcpath}/CMakeLists.txt
+    reinplace "s|%VERSION%|${version}|g" ${worksrcpath}/CMakeLists.txt
+    copy ${filespath}/src-CMakeLists.txt ${worksrcpath}/src/CMakeLists.txt
 }
 
 set docdestroot ${destroot}${prefix}/share/doc/${name}
 
-destroot {
-    xinstall -m 0755 -W ${worksrcpath} peg leg ${destroot}${prefix}/bin
+post-destroot {
     xinstall -m 0755 -d ${docdestroot}/examples
-    xinstall -m 0644 ${filespath}/peg.1.html ${docdestroot}
     foreach f [glob ${worksrcpath}/examples/*] {
         file copy ${f} ${docdestroot}
     }

@@ -1,0 +1,7 @@
+add_library(objects OBJECT tree.c compile.c)
+
+add_executable(peg peg.c $<TARGET_OBJECTS:objects>)
+add_executable(leg leg.c $<TARGET_OBJECTS:objects>)
+
+install(TARGETS peg leg RUNTIME DESTINATION ${peg_BINDIR})
+install_files(/${peg_MANDIR}/man1 FILES peg.1)
