@@ -6,7 +6,7 @@ PortGroup           cmake 1.0
 
 name                lz4
 categories          archivers
-svn.revision        96
+svn.revision        97
 version             r${svn.revision}
 revision            0
 license             New BSD
