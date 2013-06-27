@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       cmake 1.0
+
+name            jxrlib
+categories      graphics
+version         1.1
+revision        0
+set download_id 685250
+set dl_filetime 130142428056630000
+set dl_build    20588
+license         MIT
+maintainers     openmaintainer
+
+description     open source implementation of jpegxr
+long_description \
+   This is an open source implementation of the jpegxr image format standard.
+
+homepage        https://jxrlib.codeplex.com/
+master_sites    "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=${name}&DownloadId=${download_id}&FileTime=${dl_filetime}&Build=${dl_build}#"
+checksums \
+    rmd160  31b378cd0de3ce2c1d19fae3927c67046471d07b \
+    sha256  a79e27801ab19af936beb9ece36f1c6c1914c3baf25597fd270709dc4520a190
+
+regsub -all \\. ${version} _ xversion
+distname        ${name}_${xversion}
+worksrcdir      ${name}
+
+post-extract {
+    copy ${filespath}/CMakeLists.txt.in ${worksrcpath}/CMakeLists.txt
+    reinplace "s|%VERSION%|${version}|g" ${worksrcpath}/CMakeLists.txt
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex {jxrlib ([0-9]+\.[0-9.]+)}
