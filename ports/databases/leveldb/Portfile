@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            leveldb
-version         1.10.0
+version         1.12.0
 license         BSD
 maintainers     openmaintainer
 platforms       darwin
@@ -18,8 +18,8 @@ homepage        http://code.google.com/p/leveldb/
 master_sites    googlecode
 
 checksums \
-    rmd160  b821bcbcd36201d5cc89775c51e25e0d917645df \
-    sha256  84a4ab34671e1271d895f093932f8c8cfecb45b2e085da738671599825d12f62
+    rmd160  70c4d0420936da62194d6917f4f6433ab2dfbac0 \
+    sha256  a50b44bcae9680c2872081df98395a34a1ac3162ea41f646676e53fb5f691108
 
 set version_array [split ${version} .]
 set major_version [lindex ${version_array} 0]
