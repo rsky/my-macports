@@ -4,19 +4,19 @@
 PortSystem          1.0
 
 name                mroonga
-version             3.03
+version             3.05
 
-set version_mysql55     5.5.30
+set version_mysql55     5.5.32
 set revision_mysql55    0
 
-set version_mysql56     5.6.11
+set version_mysql56     5.6.12
 set revision_mysql56    0
 
-set version_mariadb     5.5.30
+set version_mariadb     5.5.31
 set revision_mariadb    0
 
-set version_percona     5.5.27
-set release_percona     29.0
+set version_percona     5.5.31
+set release_percona     30.3
 set revision_percona    0
 
 categories-append   textproc
@@ -43,24 +43,27 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  cf57f6b5be951eca726791dc2fa6ac7ccfd1d62f \
-        sha256  c88945307eb5377620c756ed0b398677156325506e34fb3a9da3efc9b53d86ea \
+        rmd160  71395427cf8a2343be2f7381462af66f717e3c49 \
+        sha256  16867044d703d83af2acc509a3b091b1b3b91b174c7c089fca7cfadbf370ddc8 \
     ${distname_mysql55}${extract.suffix} \
-        rmd160  6d93cf458a732e63e6d2b3939051233bcd0dea0a \
-        sha256  909fe596e0044082a02d2757b742a33b8a3ff399b589603940494d3d3d975053 \
+        rmd160  e59a9166a93fd873ef4fc7afa70204dc16c1f662 \
+        sha256  babb19a1e58f6b285ff75e876f550a798d37fb72b5a548ffb411e8a4a51f6890 \
     ${distname_mysql56}${extract.suffix} \
-        rmd160  acd671ace63cab1ffc442dd7e3ffa10ff9fb4659 \
-        sha256  ea4a494ea926a20ada56b1c139afdc65f5a68827068a509cd0801640d8dd079e \
+        rmd160  235b2c7b52ca40b98b08d0b27ebd0154d71f6a83 \
+        sha256  7911af0180c8014b9193bde42b6b705460fa70bf75681b62c64d1cf2580686bc \
     ${distname_mariadb}${extract.suffix} \
-        rmd160  66e26a6edd6644e2c5a1023b51ff975d00a18e9b \
-        sha256  64dba5f1819f1d4ebf7ed31d74e4106c981a24b88259995deba3734fb7c4635f \
+        rmd160  95dd3751501c2574f5c1a2346064a96d38038358 \
+        sha256  70b28e5dca7e9213fd092a669f74a537e7c88e0f670e32628907ce3ebcef2d28 \
     ${distname_percona}${extract.suffix} \
-        rmd160  f0247025b7ec4d8e1ec551588e8643aa325f5d9b \
-        sha256  4ba9e3300d99bfdbf65dd1a00e51da5bddc1582e33a58219b5184075783889ce
+        rmd160  9a7190c4690450dfbd2ceeac6589b1b9fa1d036c \
+        sha256  808fea7fa2a10e61a3767819f4f9275afc8e5a66a7567b7b6d9e3bde2b79fce3
 
 depends_lib     port:groonga
 
 configure.compiler  llvm-gcc-4.2
+
+patch.pre_args  -p0
+patchfiles      patch-configure.diff
 
 subport mysql55-mroonga {
     revision            ${revision_mysql55}
@@ -75,9 +78,11 @@ subport mysql55-mroonga {
         http://ftp.plusline.de/mysql/Downloads/MySQL-5.5/:mysql \
         http://mysql.mirrors.pair.com/Downloads/MySQL-5.5/:mysql
 
+    set mysql_bindir    ${prefix}/lib/mysql55/bin
+
     configure.args \
         --with-mysql-source=${workpath}/${distname_mysql55} \
-        --with-mysql-config=${prefix}/lib/mysql55/bin/mysql_config
+        --with-mysql-config=${mysql_bindir}/mysql_config
 
     variant doc description {Install man page and documentation} {}
     post-destroot {
@@ -100,10 +105,12 @@ subport mysql56-mroonga {
         http://ftp.plusline.de/mysql/Downloads/MySQL-5.6/:mysql \
         http://mysql.mirrors.pair.com/Downloads/MySQL-5.6/:mysql
 
+    set mysql_bindir    ${prefix}/lib/mysql56/bin
+
     configure.ldflags-append    -L${prefix}/lib/mysql56/mysql
     configure.args \
         --with-mysql-source=${workpath}/${distname_mysql56} \
-        --with-mysql-config=${prefix}/lib/mysql56/bin/mysql_config
+        --with-mysql-config=${mysql_bindir}/mysql_config
 
     variant doc description {Install man page and documentation} {}
     post-destroot {
@@ -129,9 +136,11 @@ subport mariadb-mroonga {
         http://mirror.aarnet.edu.au/pub/MariaDB/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
         http://ftp.heanet.ie/mirrors/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb
 
+    set mysql_bindir    ${prefix}/lib/mariadb/bin
+
     configure.args \
         --with-mysql-source=${workpath}/${distname_mariadb} \
-        --with-mysql-config=${prefix}/lib/mariadb/bin/mysql_config
+        --with-mysql-config=${mysql_bindir}/mysql_config
 
     variant doc description {Install man page and documentation} {}
     post-destroot {
@@ -148,9 +157,11 @@ subport percona-mroonga {
     master_sites-append \
         http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-${version_percona}-${release_percona}/source/:percona
 
+    set mysql_bindir    ${prefix}/lib/percona/bin
+
     configure.args \
         --with-mysql-source=${workpath}/${distname_percona} \
-        --with-mysql-config=${prefix}/lib/percona/bin/mysql_config
+        --with-mysql-config=${mysql_bindir}/mysql_config
 
     variant doc description {Install man page and documentation} {}
     post-destroot {
@@ -170,5 +181,25 @@ if {$name == $subport} {
     livecheck.url   ${homepage}
     livecheck.regex {Mroonga ([0-9.]+) has}
 } else {
+    notes "
+To install mroonga plugin, run the following command:
+   ${mysql_bindir}/mysql -uroot -e 'INSTALL PLUGIN mroonga SONAME \"ha_mroonga.so\";'
+   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";'
+   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME \"ha_mroonga.so\";'
+   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION mroonga_command RETURNS STRING SONAME \"ha_mroonga.so\";'
+
+To confirm successfuly installed, run the following command
+and confirm that 'mroonga' is in the list:
+
+    mysql> SHOW PLUGINS;
+    +---------+--------+----------------+---------------+---------+
+    | Name    | Status | Type           | Library       | License |
+    +---------+--------+----------------+---------------+---------+
+    | ...     | ...    | ...            | ...           | ...     |
+    | mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
+    +---------+--------+----------------+---------------+---------+
+    XX rows in set (0.00 sec)
+"
+
     livecheck.type  none
 }
