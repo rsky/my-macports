@@ -5,13 +5,13 @@ PortSystem      1.0
 PortGroup       cmake 1.0
 
 name            jxrlib
-categories      graphics
+categories      graphics devel
 version         1.1
 revision        0
 set download_id 685250
 set dl_filetime 130142428056630000
 set dl_build    20588
-license         MIT
+license         BSD
 maintainers     openmaintainer
 
 description     open source implementation of jpegxr
