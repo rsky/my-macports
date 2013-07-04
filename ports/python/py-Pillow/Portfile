@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-Pillow
-version             2.0.0
+version             2.1.0
 revision            0
 categories-append   devel
 platforms           darwin
@@ -20,18 +20,18 @@ description         Python Imaging Library (fork)
 long_description    ${description}
 
 homepage            http://github.com/python-imaging/Pillow
-master_sites        http://pypi.python.org/packages/source/P/Pillow/
+master_sites        https://pypi.python.org/packages/source/P/Pillow/
 
 distname            Pillow-${version}
 use_zip             yes
 
-checksums           rmd160  e33173cd2017f9140d6ee48541d99bb23025b2e1 \
-                    sha256  3e70c8f13675284166e4a8d8899107bf67febe676b893eb8d88785c24cca4c15
+checksums           rmd160  0472271299a2c212e85a5a2377329820cdab34b0 \
+                    sha256  c733088b9a6f856386d3fcff8c54b3c1bc623a69f7481348fe36320513d98076
 
 if {$subport != $name} {
     conflicts       py${python.version}-pil
 
-    depends_lib-append  port:py${python.version}-distribute \
+    depends_lib-append  port:py${python.version}-setuptools \
                         port:zlib \
                         port:jpeg \
                         port:tiff \
