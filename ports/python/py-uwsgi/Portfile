@@ -6,7 +6,7 @@ PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-uwsgi
-version             1.9.13
+version             1.9.14
 revision            0
 categories-append   www
 license             GPL-2+
@@ -21,8 +21,8 @@ homepage        http://projects.unbit.it/uwsgi/
 master_sites    http://projects.unbit.it/downloads/
 distname        uwsgi-${version}
 checksums \
-    rmd160  42ae40bffe471898e59837e3b90feb3a50d49583 \
-    sha256  ac1532698493b117d1b95b0d0bab2113088fc3f0f23a765ddb59504bece3c26e
+    rmd160  2a353b8809b5766082bf29b4ce5f58b3f220330e \
+    sha256  601bcd08c4b1073fed146dc7af24b21e0b0d353d2ebf5864df9613320fc759cd
 
 python.versions 24 25 26 27 31 32 33
 python.default_version 27
