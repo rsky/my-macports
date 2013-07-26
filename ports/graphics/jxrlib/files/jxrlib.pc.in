@@ -1,0 +1,12 @@
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+libdir="@libdir@"
+includedir="@includedir@"
+
+Name: jxrlib
+Description: An open source implementation of the jpegxr image format standard.
+Version: @version@
+Requires:
+Libs: -L${libdir} -ljpegxr
+Libs.private:
+Cflags: -I${includedir}/common -I${includedir}/image/decode -I${includedir}/image/encode -I${includedir}/image/sys

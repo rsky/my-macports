@@ -92,9 +92,9 @@ file(GLOB HEADERS_SYS "image/sys/*.h")
 file(GLOB HEADERS_GLUE "jxrgluelib/*.h")
 file(GLOB HEADERS_TEST "jxrtestlib/*.h")
 
-install(FILES ${HEADERS_COMMON} ${HEADERS_DEC} ${HEADERS_ENC} ${HEADERS_SYS}
-  DESTINATION "${incdir}/jxrlib"
-)
-install(FILES ${HEADERS_GLUE} ${HEADERS_TEST}
-  DESTINATION "${incdir}/jxrgluelib"
-)
+install(FILES ${HEADERS_COMMON} DESTINATION "${incdir}/jxrlib/common")
+install(FILES ${HEADERS_DEC} DESTINATION "${incdir}/jxrlib/image/decode")
+install(FILES ${HEADERS_ENC} DESTINATION "${incdir}/jxrlib/image/encode")
+install(FILES ${HEADERS_SYS} DESTINATION "${incdir}/jxrlib/image/sys")
+install(FILES ${HEADERS_GLUE} DESTINATION "${incdir}/jxrlib/jxrgluelib")
+install(FILES ${HEADERS_TEST} DESTINATION "${incdir}/jxrlib/jxrtestlib")
