@@ -11,6 +11,7 @@ maintainers		mww jwa
 license			Permissive
 description		run postgresql92 as server
 long_description	${description} (without creating any user)
+distfiles
 
 supported_archs	noarch
 
@@ -20,9 +21,6 @@ master_sites		postgresql
 dist_subdir		postgresql92
 depends_run		port:postgresql92
 
-fetch	{}
-checksum	{}
-extract	{}
 use_configure	no
 build	{}
 
