@@ -6,7 +6,7 @@ PortGroup       cmake 1.0
 
 name            peg
 categories      devel
-version         0.1.12
+version         0.1.13
 revision        0
 license         MIT
 maintainers     openmaintainer
@@ -22,8 +22,8 @@ homepage        http://piumarta.com/software/peg/
 master_sites    ${homepage}
 
 checksums \
-    rmd160  55436e003eeec50d79f932a14dbbff9e3c7d4843 \
-    sha256  76c8c1b9476d1dc113d6ecf190b3d035c547448c650dc43d633367d41a45aa00
+    rmd160  587829f7228412dfd5b9fdc8dc60de92f693a6ae \
+    sha256  1803b1427a55aae9d7a0db032669a86c4db372fdf775921e43b6308c7b69148c
 
 post-extract {
     copy ${filespath}/CMakeLists.txt.in ${worksrcpath}/CMakeLists.txt
@@ -35,8 +35,9 @@ set docdestroot ${destroot}${prefix}/share/doc/${name}
 
 post-destroot {
     xinstall -m 0755 -d ${docdestroot}/examples
+    file copy ${worksrcpath}/README.txt ${docdestroot}
     foreach f [glob ${worksrcpath}/examples/*] {
-        file copy ${f} ${docdestroot}
+        file copy ${f} ${docdestroot}/examples
     }
 }
 
