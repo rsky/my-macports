@@ -3,10 +3,11 @@
 
 PortSystem          1.0
 PortGroup           python 1.0
+PortGroup           select 1.0
 
 name                py-supervisor
-version             3.0b2
-revision            1
+version             3.0
+revision            0
 categories-append   sysutils
 license             ZPL
 maintainers         openmaintainer
@@ -22,14 +23,20 @@ homepage        http://supervisord.org/ \
 master_sites    http://pypi.python.org/packages/source/s/supervisor/
 distname        supervisor-${version}
 checksums \
-    rmd160  17b889ded65af245aac711c1a8341e1c2476a2b2 \
-    sha256  3cb0e1d8ce4e4feb8c27923ca996ad7ba725f9d6300b8f8dfd2dbac4998575ed
+    rmd160  628442f9efdefd4fdb6b9576091835661f086ff7 \
+    sha256  82aac54c5760b6a4f4c28dda203714e362a68b4a9ba8549fa65955998e3a2212
 
 python.versions 24 25 26 27
 python.default_version 27
 
+set docdestroot ${destroot}${prefix}/share/doc/${subport}
+set confdir ${prefix}/etc/${subport}
+set default_conf ${confdir}/supervisord.conf.default
+set supervisord_conf ${confdir}/supervisord.conf
+
 if {$subport != $name} {
-    depends_build-append    port:py${python.version}-setuptools
+    depends_build           port:py${python.version}-setuptools
+    depends_run             port:supervisor_select
     depends_lib-append      port:py${python.version}-meld3 \
                             port:py${python.version}-medusa
 
@@ -37,15 +44,34 @@ if {$subport != $name} {
         depends_lib-append  port:py24-elementtree
     }
 
-    if {${python.version} == ${python.default_version}} {
-        default_variants    +no_suffix
-    }
-}
+    select.group    supervisor
+    select.file     ${filespath}/py${python.version}-supervisor
 
-set docdestroot ${destroot}${prefix}/share/doc/${subport}
-set confdir ${prefix}/etc/${subport}
-set default_conf ${confdir}/supervisord.conf.default
-set supervisord_conf ${confdir}/supervisord.conf
+    notes "
+To make the Python ${python.branch} version of py-supervisor the one that is run\
+when you execute the commands without a version suffix, e.g. 'supervisor', run:
+
+port select --set ${select.group} [file tail ${select.file}]
+"
+
+    startupitem.create  yes
+    startupitem.name    ${subport}
+    startupitem.pidfile auto ${prefix}/var/run/${subport}/supervisord.pid
+    startupitem.init \
+        "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFIG=${supervisord_conf}"
+    startupitem.start \
+        "\${BINDIR}/supervisord -c \${CONFIG}"
+    startupitem.stop \
+        "\${BINDIR}/supervisorctl -c \${CONFIG} shutdown"
+    startupitem.stop \
+        "\${BINDIR}/supervisorctl -c \${CONFIG} reload"
+
+    livecheck.type  none
+} else {
+    livecheck.type  regex
+    livecheck.url   http://pypi.python.org/pypi/supervisor/
+    livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}
+}
 
 destroot.keepdirs-append \
     ${destroot}${confdir}/conf.d \
@@ -80,25 +106,3 @@ variant doc description {Install documentation} {
         file copy ${worksrcpath}/docs ${docdestroot}
     }
 }
-
-variant no_suffix description {Don't add the Python version suffix for the executables} {
-    python.link_binaries_suffix
-}
-
-if {$subport != $name} {
-    startupitem.create  yes
-    startupitem.name    ${subport}
-    startupitem.pidfile auto ${prefix}/var/run/${subport}/supervisord.pid
-    startupitem.init \
-        "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFIG=${supervisord_conf}"
-    startupitem.start \
-        "\${BINDIR}/supervisord -c \${CONFIG}"
-    startupitem.stop \
-        "\${BINDIR}/supervisorctl -c \${CONFIG} shutdown"
-    startupitem.stop \
-        "\${BINDIR}/supervisorctl -c \${CONFIG} reload"
-}
-
-livecheck.type  regex
-livecheck.url   http://pypi.python.org/pypi/supervisor/
-livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}

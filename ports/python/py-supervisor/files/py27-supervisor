@@ -1,0 +1,4 @@
+bin/echo_supervisord_conf-2.7
+bin/pidproxy-2.7
+bin/supervisorctl-2.7
+bin/supervisord-2.7
