@@ -4,19 +4,19 @@
 PortSystem          1.0
 
 name                mroonga
-version             3.05
+version             3.08
 
-set version_mysql55     5.5.32
+set version_mysql55     5.5.33
 set revision_mysql55    0
 
-set version_mysql56     5.6.12
+set version_mysql56     5.6.13
 set revision_mysql56    0
 
-set version_mariadb     5.5.31
+set version_mariadb     5.5.33a
 set revision_mariadb    0
 
-set version_percona     5.5.31
-set release_percona     30.3
+set version_percona     5.5.32
+set release_percona     31.0
 set revision_percona    0
 
 categories-append   textproc
@@ -43,20 +43,20 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  71395427cf8a2343be2f7381462af66f717e3c49 \
-        sha256  16867044d703d83af2acc509a3b091b1b3b91b174c7c089fca7cfadbf370ddc8 \
+        rmd160  c11d79c1e6c37dfb14d2bf611f9624f6078b1d72 \
+        sha256  5b5a915954bb24a08de0e6baec72a4a0367da6c93b218a20fd9d34cb627df3c2 \
     ${distname_mysql55}${extract.suffix} \
-        rmd160  e59a9166a93fd873ef4fc7afa70204dc16c1f662 \
-        sha256  babb19a1e58f6b285ff75e876f550a798d37fb72b5a548ffb411e8a4a51f6890 \
+        rmd160  a2574b2ff320b0b4f93fb3a616f4ebbacd31f641 \
+        sha256  6ad9af38de1f3595c5fb81bc24bdb62fa39b2ce1c690d87ac7d7a21ca71fceba \
     ${distname_mysql56}${extract.suffix} \
-        rmd160  235b2c7b52ca40b98b08d0b27ebd0154d71f6a83 \
-        sha256  7911af0180c8014b9193bde42b6b705460fa70bf75681b62c64d1cf2580686bc \
+        rmd160  22411eda9da0d931a44ab0710ded76c065cd05e6 \
+        sha256  5d1b230c3ce896fbea47a69b14b9efb122621a19f32c1102d388d8e7fa442d7e \
     ${distname_mariadb}${extract.suffix} \
-        rmd160  95dd3751501c2574f5c1a2346064a96d38038358 \
-        sha256  70b28e5dca7e9213fd092a669f74a537e7c88e0f670e32628907ce3ebcef2d28 \
+        rmd160  284504f3335fb7e89e039448530b3ea6ba01effc \
+        sha256  adf4d04087177fde6568082c3fee77e52e84dc3ae4eb5b994d5defaaa8c83d5b \
     ${distname_percona}${extract.suffix} \
-        rmd160  9a7190c4690450dfbd2ceeac6589b1b9fa1d036c \
-        sha256  808fea7fa2a10e61a3767819f4f9275afc8e5a66a7567b7b6d9e3bde2b79fce3
+        rmd160  7901e6f0f7312c8c226e0286ce3fa8a693a857e3 \
+        sha256  e34676cea5ceb398258408e31e8527724845f83bbbf1f22308f5069304118e8f \
 
 depends_lib     port:groonga
 
@@ -199,6 +199,12 @@ and confirm that 'mroonga' is in the list:
     | mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
     +---------+--------+----------------+---------------+---------+
     XX rows in set (0.00 sec)
+
+To uninstall mroonga plugin, run the following command:
+   ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION last_insert_grn_id;'
+   ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION mroonga_snippet;'
+   ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION mroonga_command;'
+   ${mysql_bindir}/mysql -uroot -e 'UNINSTALL PLUGIN mroonga;'
 "
 
     livecheck.type  none
