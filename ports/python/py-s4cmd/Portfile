@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+PortGroup           github 1.0
+
+github.setup        bloomreach s4cmd 8d48126ec7b2045cbe2acd53efb90ba44af70aaf
+name                py-s4cmd
+version             1.5.17
+revision            0
+categories-append   net sysutils
+license             Apache-2.0
+maintainers         openmaintainer
+supported_archs     noarch
+
+description     Super S3 command line tool
+long_description \
+    S4cmd is a command-line utility for accessing Amazon S3, inspired by s3cmd.
+
+homepage        https://github.com/bloomreach/s4cmd
+fetch.type      git
+
+python.versions 25 26 27
+python.default_version 27
+
+if {$subport != $name} {
+    depends_lib-append      port:py${python.version}-boto
+
+    if {${python.version} == ${python.default_version}} {
+        default_variants    +no_suffix
+    }
+}
+
+configure {}
+
+build {}
+
+destroot {
+    set python_prefix ${frameworks_dir}/Python.framework/Versions/${python.branch}
+    xinstall -d 0755 ${destroot}${python_prefix}/bin
+    xinstall -m 0755 ${worksrcpath}/s4cmd.py ${destroot}${python_prefix}/bin/s4cmd
+}
+
+variant no_suffix description {Don't add the Python version suffix for the executables} {
+    python.link_binaries_suffix
+}
+
+if {$subport == $name} {
+    livecheck.type      regex
+    livecheck.version   ${version}
+    livecheck.url       https://github.com/bloomreach/s4cmd/blob/master/s4cmd.py
+    livecheck.regex     {S4CMD_VERSION<.+?> <.+?>=<.+?> <.+?>&quot;([0-9.]+)&quot;}
+} else {
+    livecheck.type      none
+}
