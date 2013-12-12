@@ -6,7 +6,7 @@ PortGroup       cmake 1.0
 
 name            peg
 categories      devel
-version         0.1.13
+version         0.1.14
 revision        0
 license         MIT
 maintainers     openmaintainer
@@ -22,8 +22,8 @@ homepage        http://piumarta.com/software/peg/
 master_sites    ${homepage}
 
 checksums \
-    rmd160  587829f7228412dfd5b9fdc8dc60de92f693a6ae \
-    sha256  1803b1427a55aae9d7a0db032669a86c4db372fdf775921e43b6308c7b69148c
+    rmd160  4f03b4ae89bb4cc99cec44d597fc2ae1645c3d16 \
+    sha256  7870b2615267b4c162c11c1888ce37047491568afa36f92de9f97d2a7656f9a5
 
 post-extract {
     copy ${filespath}/CMakeLists.txt.in ${worksrcpath}/CMakeLists.txt
