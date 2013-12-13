@@ -5,13 +5,14 @@ PortSystem      1.0
 PortGroup       cmake 1.0
 
 name            rabbitmq-c
-version         0.3.0
+version         0.4.1
 revision        0
 license         MIT
 maintainers     openmaintainer
 platforms       darwin
 
 set git_user    alanxz
+set git_hash    56d2b6b
 
 description     RabbitMQ C client
 long_description \
@@ -19,14 +20,13 @@ long_description \
    with AMQP servers speaking protocol versions 0-9-1.
 
 homepage        http://alanxz.github.io/rabbitmq-c/
-master_sites    https://github.com/${git_user}/${name}/archive/
+master_sites    https://github.com/alanxz/${git_user}/${name}/download/v${version}/
 
-distname        ${name}-v${version}
-worksrcdir      ${name}-${name}-v${version}
+worksrcdir      ${git_user}-${name}-${git_hash}
 
 checksums \
-    rmd160  e6c3d134026d9e20fd82012386571e06422e1e89 \
-    sha256  7e7d8dde073d0861f6d8e5ad6381c1ff45fb004c5b22affe0e15c88348876e68
+    rmd160  8d07052cea304de3d41f9a93470fd217200e5b57 \
+    sha256  88358b2f5cc66717bfc498ee4f1519594a33dc5901162899e22ec4f05db1b4d6
 
 configure.args  -DBUILD_STATIC_LIBS:BOOL=ON \
                 -DBUILD_TOOLS:BOOL=OFF \
