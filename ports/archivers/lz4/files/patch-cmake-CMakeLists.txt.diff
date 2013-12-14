@@ -1,6 +1,6 @@
 Index: cmake/CMakeLists.txt
 ===================================================================
---- cmake/CMakeLists.txt	(revision 96)
+--- cmake/CMakeLists.txt	(revision 109)
 +++ cmake/CMakeLists.txt	(working copy)
 @@ -9,12 +9,6 @@
  
@@ -15,21 +15,21 @@ Index: cmake/CMakeLists.txt
  
  set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries")
  
-@@ -38,32 +32,14 @@
+@@ -38,31 +32,13 @@
      set(LZ4_SRCS ${LZ4_SRCS} ${LZ4_SRCS_LIB})
  endif()
  
 -if (CMAKE_SYSTEM_PROCESSOR STREQUAL "64bit")
 -    message(STATUS "Build 64bit executable binary")
 -    add_executable(lz4c64 ${LZ4_SRCS})
--    install(TARGETS lz4c64 RUNTIME DESTINATION "./")
+-    install(TARGETS lz4c64 RUNTIME DESTINATION "bin/")
 -    if(NOT BUILD_SHARED_LIBS)
 -        message(STATUS "Build 32bit executable binary")
 -        add_executable(lz4c32 ${LZ4_SRCS})
--        install(TARGETS lz4c32 RUNTIME DESTINATION "./")
+-        install(TARGETS lz4c32 RUNTIME DESTINATION "bin/")
 +message(STATUS "Build executable binary")
 +add_executable(lz4c ${LZ4_SRCS})
-+install(TARGETS lz4c RUNTIME DESTINATION bin)
++install(TARGETS lz4c RUNTIME DESTINATION "bin/")
  
 -        SET_TARGET_PROPERTIES(lz4c32 PROPERTIES
 -            COMPILE_FLAGS PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
@@ -37,7 +37,7 @@ Index: cmake/CMakeLists.txt
 -else()
 -    message(STATUS "Build 32bit executable binary")
 -    add_executable(lz4c32 ${LZ4_SRCS})
--    install(TARGETS lz4c32 RUNTIME DESTINATION "./")
+-    install(TARGETS lz4c32 RUNTIME DESTINATION "bin/")
 -endif()
 -
  if(BUILD_SHARED_LIBS)
@@ -47,12 +47,10 @@ Index: cmake/CMakeLists.txt
 -    else()
 -        target_link_libraries(lz4c32 liblz4)
 -    endif()
--	
 +    target_link_libraries(lz4c liblz4)
-+
+ 	
      # for static library
      add_library(liblz4_static STATIC ${LZ4_SRCS_LIB})
-     set_target_properties(liblz4_static PROPERTIES OUTPUT_NAME lz4)
 @@ -99,7 +75,7 @@
  ADD_DEFINITIONS("-Wundef")
  ADD_DEFINITIONS("-Wcast-align")
