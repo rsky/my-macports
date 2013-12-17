@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-Pillow
-version             2.2.1
+version             2.2.2
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,10 +24,10 @@ master_sites        http://pypi.python.org/packages/source/P/Pillow/
 
 distname            Pillow-${version}
 
-checksums           rmd160  7750b2a81b0963576febc069628548626269fdd6 \
-                    sha256  a8440145d6e08db16f2a03b134b057c4524809e18a06cc8fe0e5e885dc4d8969
+checksums           rmd160  d83f59122eba2b2b335bac6806edb821087c8ca0 \
+                    sha256  db49a634e981916c64954ec8da3142b88f1769608550b870b9184986db82a421
 
-if {$subport != $name} {
+if {${name} ne ${subport}} {
     use_zip             yes
 
     conflicts       py${python.version}-pil
@@ -50,5 +50,5 @@ if {$subport != $name} {
 } else {
     livecheck.type      regex
     livecheck.url       ${master_sites}
-    livecheck.regex     "Pillow-(\\d+(?:\\.\\d+)*)\.\[tz\]"
+    livecheck.regex     {Pillow-(\d+(?:\.\d+)*)\.[tz]}
 }
