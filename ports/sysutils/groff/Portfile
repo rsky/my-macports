@@ -5,6 +5,7 @@ PortSystem          1.0
 
 name                groff
 version             1.22.2
+revision            1
 categories          sysutils textproc
 platforms           darwin
 maintainers         nomaintainer
@@ -42,8 +43,7 @@ post-destroot {
 }
 
 variant ghostscript description {Support Ghostscript} {
-    configure.args-delete   --without-gs
-    configure.args-append   --with-gs=${prefix}/bin/gs
+    configure.args-replace  --without-gs --with-gs=${prefix}/bin/gs
     depends_lib-append  port:ghostscript \
                         port:psutils \
                         port:netpbm
