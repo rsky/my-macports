@@ -4,15 +4,15 @@
 PortSystem          1.0
 
 name                mroonga
-version             3.08
+version             3.11
 
 set version_mysql55     5.5.33
 set revision_mysql55    0
 
-set version_mysql56     5.6.13
+set version_mysql56     5.6.15
 set revision_mysql56    0
 
-set version_mariadb     5.5.33a
+set version_mariadb     5.5.34
 set revision_mariadb    0
 
 set version_percona     5.5.32
@@ -43,24 +43,22 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  c11d79c1e6c37dfb14d2bf611f9624f6078b1d72 \
-        sha256  5b5a915954bb24a08de0e6baec72a4a0367da6c93b218a20fd9d34cb627df3c2 \
+        rmd160  488360d3d733890796553288a7b5283d3bdb9851 \
+        sha256  e2a9c33d1f59c0bf8be1e9f9ae8b5c753e74998745a6213eda63ed346cf2f7ff \
     ${distname_mysql55}${extract.suffix} \
         rmd160  a2574b2ff320b0b4f93fb3a616f4ebbacd31f641 \
         sha256  6ad9af38de1f3595c5fb81bc24bdb62fa39b2ce1c690d87ac7d7a21ca71fceba \
     ${distname_mysql56}${extract.suffix} \
-        rmd160  22411eda9da0d931a44ab0710ded76c065cd05e6 \
-        sha256  5d1b230c3ce896fbea47a69b14b9efb122621a19f32c1102d388d8e7fa442d7e \
+        rmd160  aee23443e02f0f2078ce99448c7453c0166c223d \
+        sha256  f0ed95faf51670eb9d57ae901e03b0cda79f6c5899f0494b9ec867b1686fe4c7 \
     ${distname_mariadb}${extract.suffix} \
-        rmd160  284504f3335fb7e89e039448530b3ea6ba01effc \
-        sha256  adf4d04087177fde6568082c3fee77e52e84dc3ae4eb5b994d5defaaa8c83d5b \
+        rmd160  75a1268b2ef21fd2cbf530ecb0ac51798ebac618 \
+        sha256  a4d8b54be0f5784924629a1e87dbbccc4c0aaf537c76951e265625deda322f89 \
     ${distname_percona}${extract.suffix} \
         rmd160  7901e6f0f7312c8c226e0286ce3fa8a693a857e3 \
-        sha256  e34676cea5ceb398258408e31e8527724845f83bbbf1f22308f5069304118e8f \
+        sha256  e34676cea5ceb398258408e31e8527724845f83bbbf1f22308f5069304118e8f
 
 depends_lib     port:groonga
-
-configure.compiler  llvm-gcc-4.2
 
 patch.pre_args  -p0
 patchfiles      patch-configure.diff
