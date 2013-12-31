@@ -6,7 +6,7 @@ PortGroup           cmake 1.0
 
 name                lz4
 categories          archivers
-svn.revision        109
+svn.revision        110
 version             r${svn.revision}
 revision            0
 license             New BSD
@@ -25,9 +25,6 @@ fetch.type          svn
 svn.url             http://lz4.googlecode.com/svn/trunk
 worksrcdir          trunk/cmake
 use_parallel_build  no
-
-patchfiles          patch-cmake-CMakeLists.txt.diff
-patch.pre_args      -p1
 
 configure.args-append   -DBUILD_SHARED_LIBS:BOOL=ON
 
