@@ -11,6 +11,7 @@ from myportutil.util import find_common_ports
 VERSION_PATTERN = re.compile(r'version[ \t]+([^ \t\r\n]+)')
 REVISION_PATTERN = re.compile(r'revision[ \t]+([^ \t\r\n]+)')
 
+
 def read_version(portfile):
     """Portfileからバージョンを取得する
     """
@@ -36,6 +37,7 @@ def read_version(portfile):
 
     return LooseVersion(version + '_' + revision)
 
+
 def compare_version(name, private_portfile, default_portfile):
     """portのバージョンを比較・表示する
     """
@@ -49,8 +51,9 @@ def compare_version(name, private_portfile, default_portfile):
         sign = '<'
 
     print('{name} ({pv} {sign} {dv})'.format(
-            name=name, sign=sign,
-            pv=private_version, dv=default_version))
+          name=name, sign=sign,
+          pv=private_version, dv=default_version))
+
 
 def main():
     """main

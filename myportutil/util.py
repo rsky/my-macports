@@ -4,12 +4,15 @@
 """
 
 from __future__ import absolute_import
-import os, re, subprocess
+import os
+import re
+import subprocess
 from glob import glob
 from .path import DEFAULT_PORTS_DIR, PRIVATE_PORTS_DIR
 
 
 CATEGORY_PATTERN = re.compile(r'\((\w+)')
+
 
 def get_category(port):
     """port info を叩いてカテゴリを判定する
@@ -24,6 +27,7 @@ def get_category(port):
         return None
 
     return match.group(1)
+
 
 def find_common_ports():
     """独自のportと標準のport両方が存在するもののリストを返す

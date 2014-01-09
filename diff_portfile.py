@@ -4,9 +4,12 @@
 """
 
 from __future__ import print_function
-import os, sys, subprocess
+import os
+import sys
+import subprocess
 from myportutil import util
 from myportutil.path import DEFAULT_PORTS_DIR, PRIVATE_PORTS_DIR
+
 
 def diff(port, category=None, diff_cmd='diff'):
     """指定したportのPortfileの差分を取る
@@ -30,6 +33,7 @@ def diff(port, category=None, diff_cmd='diff'):
 
     subprocess.call([diff_cmd, '-u', default_portfile, private_portfile])
 
+
 def main():
     """main
     """
@@ -44,6 +48,7 @@ def main():
     else:
         for port in sys.argv[1:]:
             diff(port, diff_cmd=diff_cmd)
+
 
 if __name__ == '__main__':
     main()
