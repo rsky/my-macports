@@ -1,0 +1,82 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                supervisor
+version             3.0
+revision            0
+categories-append   sysutils
+license             ZPL
+maintainers         openmaintainer
+supported_archs     noarch
+
+description     Process manager for UNIX-like OSs
+long_description \
+   The supervisor is a client/server system that allows its users \
+   to control a number of processes on UNIX-like operating systems
+
+homepage        http://supervisord.org/ \
+                http://pypi.python.org/pypi/supervisor/
+master_sites    http://pypi.python.org/packages/source/s/supervisor/
+distname        supervisor-${version}
+checksums \
+    rmd160  628442f9efdefd4fdb6b9576091835661f086ff7 \
+    sha256  82aac54c5760b6a4f4c28dda203714e362a68b4a9ba8549fa65955998e3a2212
+
+python.default_version 27
+python.link_binaries_suffix
+
+depends_build           port:py${python.version}-setuptools
+depends_lib-append      port:py${python.version}-meld3
+
+set docdestroot ${destroot}${prefix}/share/doc/supervisor
+set confdir ${prefix}/etc/supervisor
+set default_conf ${confdir}/supervisord.conf.default
+set supervisord_conf ${confdir}/supervisord.conf
+
+destroot.keepdirs-append \
+    ${destroot}${confdir}/conf.d \
+    ${destroot}${prefix}/var/log/supervisor \
+    ${destroot}${prefix}/var/run/supervisor
+
+post-destroot {
+    xinstall -d ${docdestroot}
+    foreach f [glob ${worksrcpath}/*.txt] {
+        file copy ${f} ${docdestroot}
+    }
+    foreach f [glob ${worksrcpath}/*.rst] {
+        file copy ${f} ${docdestroot}
+    }
+    file copy ${worksrcpath}/docs ${docdestroot}
+
+    xinstall -d ${destroot}${confdir}
+    xinstall -m 0644 \
+        ${portpath}/files/supervisord.conf.default.in \
+        ${destroot}${default_conf}
+    reinplace "s|%PREFIX%|${prefix}|g" ${destroot}${default_conf}
+    reinplace "s|%NAME%|supervisor|g" ${destroot}${default_conf}
+}
+
+post-activate {
+    if {![file exists ${supervisord_conf}]} {
+        file copy ${default_conf} ${supervisord_conf}
+    }
+}
+
+startupitem.create  yes
+startupitem.name    supervisor
+startupitem.pidfile auto ${prefix}/var/run/supervisor/supervisord.pid
+startupitem.init \
+    "BINDIR=${frameworks_dir}/Python.framework/Versions/${python.branch}/bin\nCONFIG=${supervisord_conf}"
+startupitem.start \
+    "\${BINDIR}/supervisord -c \${CONFIG}"
+startupitem.stop \
+    "\${BINDIR}/supervisorctl -c \${CONFIG} shutdown"
+startupitem.stop \
+    "\${BINDIR}/supervisorctl -c \${CONFIG} reload"
+
+livecheck.type  regex
+livecheck.url   http://pypi.python.org/pypi/supervisor/
+livecheck.regex {supervisor ([0-9.]+(?:[ab][0-9]+)?)}
