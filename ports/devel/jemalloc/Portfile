@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            jemalloc
 categories      devel
-version         3.4.1
+version         3.5.0
 revision        0
 license         BSD
 maintainers     openmaintainer
@@ -20,8 +20,8 @@ master_sites    http://www.canonware.com/download/jemalloc/
 use_bzip2       yes
 
 checksums \
-    rmd160  f78bf379dea9fc6753b8697bd8cfa46c80a9afdc \
-    sha256  7341953fe9f21342b005b6c7e798631678ae713293a64d5fa61dea7449fc10fb
+    rmd160  9167e4c876a5065d060720a61c8b4f4a3cd5bc97 \
+    sha256  5b13dbef27c46e9efbe19b5eef574e298409ed9dbbde85ec805e29d04c05e473
 
 depends_build   port:libxslt
 
