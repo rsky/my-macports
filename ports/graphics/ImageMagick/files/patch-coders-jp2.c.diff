@@ -1,5 +1,5 @@
---- ImageMagick-6.8.8-2/coders/jp2.c.org	2014-01-06 01:59:30.000000000 +0900
-+++ ImageMagick-6.8.8-2/coders/jp2.c	2014-01-25 10:17:37.000000000 +0900
+--- coders/jp2.c.org
++++ coders/jp2.c
 @@ -369,7 +369,7 @@
    if (opj_read_header(jp2_stream,jp2_codec,&jp2_image) == 0)
      {
