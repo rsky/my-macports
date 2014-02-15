@@ -99,7 +99,7 @@ case $ACTION in
             $NGINX -t && STATUS=0
             if [ $STATUS ]; then
                 echo -n "Site $1 has been enabled. "
-                echo "Run sudo launchctl stop org.macports.nginx to apply the changes."
+                echo 'Run `sudo nereload` to apply the changes.'
                 exit 0
             else
                 exit 2
@@ -114,7 +114,7 @@ case $ACTION in
             rm $SITE_ENABLED && STATUS=0
             if [ $STATUS ]; then
                 echo -n "Site $1 has been disabled. "
-                echo "Run sudo launchctl stop org.macports.nginx to apply the changes."
+                echo 'Run sudo nxreload to apply the changes.'
                 exit 0
             else
                 exit 2

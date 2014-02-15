@@ -4,8 +4,8 @@
 PortSystem      1.0
 
 name            nxensite
-version         1.0
-revision        1
+version         1.1
+revision        0
 
 license         MIT
 maintainers     openmaintainer
@@ -19,6 +19,8 @@ long_description \
 
 homepage        https://github.com/perusio/nginx_ensite
 
+platforms       darwin
+
 depends_run     port:nginx \
                 port:gawk \
                 port:coreutils
@@ -29,6 +31,8 @@ extract         {}
 use_configure   no
 build           {}
 destroot {
+    xinstall -m 0755 ${filespath}/nxreload \
+                     ${destroot}${prefix}/sbin/nxreload
     xinstall -m 0755 ${filespath}/nginx_ensite/nginx_ensite.in \
                      ${destroot}${prefix}/sbin/nxensite
     system "ln -s nxensite ${destroot}${prefix}/sbin/nxdissite"
