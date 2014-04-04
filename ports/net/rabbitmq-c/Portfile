@@ -5,6 +5,7 @@ PortSystem      1.0
 PortGroup       cmake 1.0
 
 name            rabbitmq-c
+categories      net devel
 version         0.5.0
 revision        0
 license         MIT
