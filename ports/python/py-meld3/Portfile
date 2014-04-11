@@ -5,16 +5,16 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-meld3
-version             0.6.10
-revision            1
+version             1.0.0
+revision            0
 categories-append   textproc www
-license             ZPL
+license             Repoze
 maintainers         openmaintainer
 supported_archs     noarch
 
 description         SGML template system
 long_description \
-   meld3 is an HTML/XML templating system for Python 2.3+ which keeps \
+   meld3 is an HTML/XML templating system for Python 2.5+ which keeps \
    template markup and dynamic rendering logic separate from one another.
 
 homepage        http://www.plope.com/software/meld3/ \
@@ -23,22 +23,14 @@ master_sites    http://pypi.python.org/packages/source/m/meld3/ \
                 http://www.plope.com/software/meld3/
 distname        meld3-${version}
 checksums \
-    rmd160  d96c170f7fa2a52418bff8fd9f6e9d03f9caef27 \
-    sha256  6642f2444f3527a9338104edc2d1b420ba5a770b578063f729530d1f2f01a271
+    rmd160  079742bd8829507272c75a78c90e26dd05dc811b \
+    sha256  57b41eebbb5a82d4a928608962616442e239ec6d611fe6f46343e765e36f0b2b
 
-patchfiles      patch-ez_setup.py \
-                patch-setup.py
-
-python.versions 24 25 26 27
+python.versions 25 26 27 32 33 34
 python.default_version 27
 
 if {$subport != $name} {
     depends_build-append    port:py${python.version}-setuptools
-
-    if {${python.version} == 24} {
-        depends_lib-append  port:py24-elementtree
-    }
-
     livecheck.type  none
 } else {
     livecheck.type  regex
