@@ -63,7 +63,10 @@ depends_lib     port:groonga
 patch.pre_args  -p0
 patchfiles      patch-configure.diff
 
-subport mysql55-mroonga {
+# define comment proc
+proc # args {}
+
+{#} subport mysql55-mroonga {
     revision            ${revision_mysql55}
     depends_lib-append  port:mysql55
     distfiles-append    ${distname_mysql55}${extract.suffix}:mysql
@@ -118,7 +121,7 @@ subport mysql56-mroonga {
     }
 }
 
-subport mariadb-mroonga {
+{#} subport mariadb-mroonga {
     revision            ${revision_mariadb}
     depends_lib-append  port:mariadb
     distfiles-append    ${distname_mariadb}${extract.suffix}:mariadb
@@ -148,7 +151,7 @@ subport mariadb-mroonga {
     }
 }
 
-subport percona-mroonga {
+{#} subport percona-mroonga {
     revision            ${revision_percona}
     depends_lib-append  port:percona
     distfiles-append    ${distname_percona}${extract.suffix}:percona
