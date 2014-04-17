@@ -4,12 +4,12 @@
 PortSystem          1.0
 
 name                mroonga
-version             3.11
+version             4.01
 
-set version_mysql55     5.5.33
+set version_mysql55     5.5.37
 set revision_mysql55    0
 
-set version_mysql56     5.6.15
+set version_mysql56     5.6.16
 set revision_mysql56    0
 
 set version_mariadb     5.5.34
@@ -43,14 +43,14 @@ set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  488360d3d733890796553288a7b5283d3bdb9851 \
-        sha256  e2a9c33d1f59c0bf8be1e9f9ae8b5c753e74998745a6213eda63ed346cf2f7ff \
+        rmd160  d752a24c22d70c352dc200462e236429b01145fa \
+        sha256  ca238227e0f8301b8c1295e3391763cdb8895779e37cce44a9cc7558de221973 \
     ${distname_mysql55}${extract.suffix} \
-        rmd160  a2574b2ff320b0b4f93fb3a616f4ebbacd31f641 \
-        sha256  6ad9af38de1f3595c5fb81bc24bdb62fa39b2ce1c690d87ac7d7a21ca71fceba \
+        rmd160  1af56fc6d508a512fbac3372a0db50722b8c5f4e \
+        sha256  da1ac0a3813d0b03a26618fcf003a5df16a4afc2dddc0c98b13f41923aab02a8 \
     ${distname_mysql56}${extract.suffix} \
-        rmd160  aee23443e02f0f2078ce99448c7453c0166c223d \
-        sha256  f0ed95faf51670eb9d57ae901e03b0cda79f6c5899f0494b9ec867b1686fe4c7 \
+        rmd160  11d21eb50e63776876dccf3a72e19e5de4eec9c2 \
+        sha256  70fe55985ba187a26cce6905c57f66bb9904b33760e3ff30b611697b4bf2fde0 \
     ${distname_mariadb}${extract.suffix} \
         rmd160  75a1268b2ef21fd2cbf530ecb0ac51798ebac618 \
         sha256  a4d8b54be0f5784924629a1e87dbbccc4c0aaf537c76951e265625deda322f89 \
@@ -59,9 +59,6 @@ checksums \
         sha256  e34676cea5ceb398258408e31e8527724845f83bbbf1f22308f5069304118e8f
 
 depends_lib     port:groonga
-
-patch.pre_args  -p0
-patchfiles      patch-configure.diff
 
 # define comment proc
 proc # args {}
@@ -182,29 +179,33 @@ if {$name == $subport} {
     livecheck.url   ${homepage}
     livecheck.regex {Mroonga ([0-9.]+) has}
 } else {
+    set quoted_soname "'ha_mroonga.so'"
     notes "
 To install mroonga plugin, run the following command:
-   ${mysql_bindir}/mysql -uroot -e 'INSTALL PLUGIN mroonga SONAME \"ha_mroonga.so\";'
-   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME \"ha_mroonga.so\";'
-   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME \"ha_mroonga.so\";'
-   ${mysql_bindir}/mysql -uroot -e 'CREATE FUNCTION mroonga_command RETURNS STRING SONAME \"ha_mroonga.so\";'
+   ${mysql_bindir}/mysql -uroot -e \"INSTALL PLUGIN mroonga SONAME ${quoted_soname};\"
+   ${mysql_bindir}/mysql -uroot -e \"CREATE FUNCTION last_insert_grn_id RETURNS INTEGER SONAME ${quoted_soname};\"
+   ${mysql_bindir}/mysql -uroot -e \"CREATE FUNCTION mroonga_snippet RETURNS STRING SONAME ${quoted_soname};\"
+   ${mysql_bindir}/mysql -uroot -e \"CREATE FUNCTION mroonga_command RETURNS STRING SONAME ${quoted_soname};\"
+   ${mysql_bindir}/mysql -uroot -e \"CREATE FUNCTION mroonga_escape RETURNS STRING SONAME ${quoted_soname};\"
 
 To confirm successfuly installed, run the following command
 and confirm that 'mroonga' is in the list:
 
-    mysql> SHOW PLUGINS;
-    +---------+--------+----------------+---------------+---------+
-    | Name    | Status | Type           | Library       | License |
-    +---------+--------+----------------+---------------+---------+
-    | ...     | ...    | ...            | ...           | ...     |
-    | mroonga | ACTIVE | STORAGE ENGINE | ha_mroonga.so | GPL     |
-    +---------+--------+----------------+---------------+---------+
+    mysql> SHOW ENGINES;
+    +---------+---------+-----------------------------------------+--------------+------+------------+
+    | Engine  | Support | Comment                                 | Transactions | XA   | Savepoints |
+    +---------+---------+-----------------------------------------+--------------+------+------------+
+    | ....    | ...     | ...                                     | ...          | ...  | ...        |
+    | mroonga | YES     | CJK-ready fulltext search, column store | NO           | NO   | NO         |
+    | ...     | ...     | ...                                     | ...          | ...  | ...        |
+    +---------+---------+-----------------------------------------+--------------+------+------------+
     XX rows in set (0.00 sec)
 
 To uninstall mroonga plugin, run the following command:
    ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION last_insert_grn_id;'
    ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION mroonga_snippet;'
    ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION mroonga_command;'
+   ${mysql_bindir}/mysql -uroot -e 'DROP FUNCTION mroonga_escape;'
    ${mysql_bindir}/mysql -uroot -e 'UNINSTALL PLUGIN mroonga;'
 "
 
