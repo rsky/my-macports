@@ -82,13 +82,13 @@ To confirm successfuly installed, run the following command
 and confirm that 'mroonga' is in the list:
 
     mysql> SHOW ENGINES;
-    +---------+---------+-----------------------------------------+--------------+------+------------+
-    | Engine  | Support | Comment                                 | Transactions | XA   | Savepoints |
-    +---------+---------+-----------------------------------------+--------------+------+------------+
-    | ....    | ...     | ...                                     | ...          | ...  | ...        |
-    | mroonga | YES     | CJK-ready fulltext search, column store | NO           | NO   | NO         |
-    | ...     | ...     | ...                                     | ...          | ...  | ...        |
-    +---------+---------+-----------------------------------------+--------------+------+------------+
+    +---------+---------+---------+--------------+-----+------------+
+    | Engine  | Support | Comment | Transactions | XA  | Savepoints |
+    +---------+---------+---------+--------------+-----+------------+
+    | ....    | ...     | ...     | ...          | ... | ...        |
+    | mroonga | YES     | CJK...  | NO           | NO  | NO         |
+    | ...     | ...     | ...     | ...          | ... | ...        |
+    +---------+---------+---------+--------------+-----+------------+
     XX rows in set (0.00 sec)
 
 To uninstall mroonga plugin, run the following command:
