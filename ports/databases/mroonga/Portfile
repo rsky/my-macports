@@ -6,18 +6,8 @@ PortSystem          1.0
 name                mroonga
 version             4.01
 
-set version_mysql55     5.5.37
-set revision_mysql55    0
-
 set version_mysql56     5.6.16
 set revision_mysql56    0
-
-set version_mariadb     5.5.34
-set revision_mariadb    0
-
-set version_percona     5.5.32
-set release_percona     31.0
-set revision_percona    0
 
 categories-append   textproc
 license             LGPL-2.1
@@ -36,72 +26,23 @@ distfiles       ${distname}${extract.suffix}:mroonga
 
 master_sites    http://packages.groonga.org/source/mroonga/:mroonga
 
-set distname_mysql55    mysql-${version_mysql55}
 set distname_mysql56    mysql-${version_mysql56}
-set distname_mariadb    mariadb-${version_mariadb}
-set distname_percona    Percona-Server-${version_percona}-rel${release_percona}
 
 checksums \
     ${distname}${extract.suffix} \
         rmd160  d752a24c22d70c352dc200462e236429b01145fa \
         sha256  ca238227e0f8301b8c1295e3391763cdb8895779e37cce44a9cc7558de221973 \
-    ${distname_mysql55}${extract.suffix} \
-        rmd160  1af56fc6d508a512fbac3372a0db50722b8c5f4e \
-        sha256  da1ac0a3813d0b03a26618fcf003a5df16a4afc2dddc0c98b13f41923aab02a8 \
     ${distname_mysql56}${extract.suffix} \
         rmd160  11d21eb50e63776876dccf3a72e19e5de4eec9c2 \
-        sha256  70fe55985ba187a26cce6905c57f66bb9904b33760e3ff30b611697b4bf2fde0 \
-    ${distname_mariadb}${extract.suffix} \
-        rmd160  75a1268b2ef21fd2cbf530ecb0ac51798ebac618 \
-        sha256  a4d8b54be0f5784924629a1e87dbbccc4c0aaf537c76951e265625deda322f89 \
-    ${distname_percona}${extract.suffix} \
-        rmd160  7901e6f0f7312c8c226e0286ce3fa8a693a857e3 \
-        sha256  e34676cea5ceb398258408e31e8527724845f83bbbf1f22308f5069304118e8f
+        sha256  70fe55985ba187a26cce6905c57f66bb9904b33760e3ff30b611697b4bf2fde0
 
 depends_lib     port:groonga
-
-# define comment proc
-proc # args {}
-
-{#} subport mysql55-mroonga {
-    revision            ${revision_mysql55}
-    depends_lib-append  port:mysql55
-    distfiles-append    ${distname_mysql55}${extract.suffix}:mysql
-    master_sites-append \
-        http://cdn.mysql.com/Downloads/MySQL-5.5/:mysql \
-        http://mysql.he.net/Downloads/MySQL-5.5/:mysql \
-        http://mirrors.sunsite.dk/mysql/Downloads/MySQL-5.5/:mysql \
-        http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-5.5/:mysql \
-        http://mirror.facebook.net/mysql/Downloads/MySQL-5.5/:mysql \
-        http://ftp.plusline.de/mysql/Downloads/MySQL-5.5/:mysql \
-        http://mysql.mirrors.pair.com/Downloads/MySQL-5.5/:mysql
-
-    set mysql_bindir    ${prefix}/lib/mysql55/bin
-
-    configure.args \
-        --with-mysql-source=${workpath}/${distname_mysql55} \
-        --with-mysql-config=${mysql_bindir}/mysql_config
-
-    variant doc description {Install man page and documentation} {}
-    post-destroot {
-        if {![variant_isset doc]} {
-            delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
-        }
-    }
-}
 
 subport mysql56-mroonga {
     revision            ${revision_mysql56}
     depends_lib-append  port:mysql56
     distfiles-append    ${distname_mysql56}${extract.suffix}:mysql
-    master_sites-append \
-        http://cdn.mysql.com/Downloads/MySQL-5.6/:mysql \
-        http://mysql.he.net/Downloads/MySQL-5.6/:mysql \
-        http://mirrors.sunsite.dk/mysql/Downloads/MySQL-5.6/:mysql \
-        http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-5.6/:mysql \
-        http://mirror.facebook.net/mysql/Downloads/MySQL-5.6/:mysql \
-        http://ftp.plusline.de/mysql/Downloads/MySQL-5.6/:mysql \
-        http://mysql.mirrors.pair.com/Downloads/MySQL-5.6/:mysql
+    master_sites-append mysql:MySQL-5.6:mysql
 
     set mysql_bindir    ${prefix}/lib/mysql56/bin
 
@@ -118,61 +59,10 @@ subport mysql56-mroonga {
     }
 }
 
-{#} subport mariadb-mroonga {
-    revision            ${revision_mariadb}
-    depends_lib-append  port:mariadb
-    distfiles-append    ${distname_mariadb}${extract.suffix}:mariadb
-    master_sites-append \
-        http://ftp.osuosl.org/pub/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror2.hs-esslingen.de/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror3.layerjet.com/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://ftp.yz.yamagata-u.ac.jp/pub/dbms/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirrors.supportex.net/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror.switch.ch/mirror/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirrors.fe.up.pt/pub/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://gd.tuwien.ac.at/db/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://mirror.aarnet.edu.au/pub/MariaDB/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb \
-        http://ftp.heanet.ie/mirrors/mariadb/${distname_mariadb}/kvm-tarbake-jaunty-x86/:mariadb
-
-    set mysql_bindir    ${prefix}/lib/mariadb/bin
-
-    configure.args \
-        --with-mysql-source=${workpath}/${distname_mariadb} \
-        --with-mysql-config=${mysql_bindir}/mysql_config
-
-    variant doc description {Install man page and documentation} {}
-    post-destroot {
-        if {![variant_isset doc]} {
-            delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
-        }
-    }
-}
-
-{#} subport percona-mroonga {
-    revision            ${revision_percona}
-    depends_lib-append  port:percona
-    distfiles-append    ${distname_percona}${extract.suffix}:percona
-    master_sites-append \
-        http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-${version_percona}-${release_percona}/source/:percona
-
-    set mysql_bindir    ${prefix}/lib/percona/bin
-
-    configure.args \
-        --with-mysql-source=${workpath}/${distname_percona} \
-        --with-mysql-config=${mysql_bindir}/mysql_config
-
-    variant doc description {Install man page and documentation} {}
-    post-destroot {
-        if {![variant_isset doc]} {
-            delete ${destroot}${prefix}/share/doc ${destroot}${prefix}/share/man
-        }
-    }
-}
-
 if {$name == $subport} {
     configure {
         ui_warn "mroonga is a virtual port"
-        return -code error "try mysql55-mroonga, mysql56-mroonga, mariadb-mroonga or percona-mroonga"
+        return -code error "try mysql56-mroonga"
     }
 
     livecheck.type  regex
