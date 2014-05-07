@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                mroonga
-version             4.01
+version             4.02
 
 set version_mysql56     5.6.16
 set revision_mysql56    0
@@ -30,8 +30,8 @@ set distname_mysql56    mysql-${version_mysql56}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  d752a24c22d70c352dc200462e236429b01145fa \
-        sha256  ca238227e0f8301b8c1295e3391763cdb8895779e37cce44a9cc7558de221973 \
+        rmd160  bab82f8584c6d942f55d209b059517444debf030 \
+        sha256  4b0d613a5c8210fac5d75d9e799bda0be21ca89e107bf0a99c7fa364baf95b85 \
     ${distname_mysql56}${extract.suffix} \
         rmd160  11d21eb50e63776876dccf3a72e19e5de4eec9c2 \
         sha256  70fe55985ba187a26cce6905c57f66bb9904b33760e3ff30b611697b4bf2fde0
