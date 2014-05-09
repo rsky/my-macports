@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       github 1.0
+
+name            direnv
+categories      sysutils shells
+version         2.3.0
+revision        0
+license         MIT
+maintainers     openmaintainer
+platforms       darwin
+
+github.setup    zimbatm ${name} ${version} v
+
+description     Unclutter your .profile
+long_description \
+   direnv is an environment variable manager for your shell. \
+   It knows how to hook into bash, zsh and fish shell to load or \
+   unload environment variables depending on your current directory. \
+   This allows to have project-specific environment variables and \
+   not clutter the \"~/.profile\" file.
+
+checksums \
+    rmd160  6521eb99fe19e150e226550768aabc16eba1046a \
+    sha256  6b4cd186b6406c92c39f37a5712643a09c1965a588383795abf3b4401c1ab0b8
+
+depends_lib     port:go
+
+use_configure   no
+destroot.post_args  DESTDIR="${destroot}${prefix}"
