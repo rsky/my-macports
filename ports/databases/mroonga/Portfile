@@ -4,9 +4,9 @@
 PortSystem          1.0
 
 name                mroonga
-version             4.02
+version             4.03
 
-set version_mysql56     5.6.16
+set version_mysql56     5.6.19
 set revision_mysql56    0
 
 categories-append   textproc
@@ -30,11 +30,11 @@ set distname_mysql56    mysql-${version_mysql56}
 
 checksums \
     ${distname}${extract.suffix} \
-        rmd160  bab82f8584c6d942f55d209b059517444debf030 \
-        sha256  4b0d613a5c8210fac5d75d9e799bda0be21ca89e107bf0a99c7fa364baf95b85 \
+        rmd160  b4118e02e7ad210357264b69587fc3fe56847c35 \
+        sha256  7dcfd0830864a93c00a32aab90cc5fe2297c44f7667c08ad937d7f1a7e3b35f8 \
     ${distname_mysql56}${extract.suffix} \
-        rmd160  11d21eb50e63776876dccf3a72e19e5de4eec9c2 \
-        sha256  70fe55985ba187a26cce6905c57f66bb9904b33760e3ff30b611697b4bf2fde0
+        rmd160  3cc8acbef87c98f5221307f9b8351bd7d2f7f7e3 \
+        sha256  80ef3aae048866539380e7e330d9f1034f0ee50ddfb9c662570132492678b09f
 
 depends_lib     port:groonga
 
