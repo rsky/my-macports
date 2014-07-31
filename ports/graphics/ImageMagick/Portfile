@@ -7,7 +7,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.9-5
+version                     6.8.9-6
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                http://www.imagemagick.org/download/ \
                             ftp://ftp.sunet.se/pub/multimedia/graphics/ImageMagick \
                             ftp://sunsite.icm.edu.pl/packages/ImageMagick
 
-checksums                   sha256  ea66e0824e6c208c3318c0d02ca12376416b29a634e099a90c2c840edd7de0e1
+checksums                   sha256  238f8b0f6188ead6b541f88bd8324cc049788662ccd9396ee61caac99d970605
 
 depends_lib                 port:bzip2 \
                             port:xz \
@@ -163,21 +163,14 @@ variant wmf description {Support the Windows Metafile Format} {
     configure.args-replace  --without-wmf --with-wmf
 }
 
-# Legacy no_x11 variant to be removed after May 2014.
-variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
-
-variant x11 conflicts no_x11 {
+variant x11 {
     depends_lib-append      port:xorg-libX11 \
                             port:xorg-libXext \
                             port:xorg-libXt
     configure.args-replace  --without-x --with-x
 }
 
-if {[variant_isset no_x11]} {
-    default_variants -x11
-} else {
-    default_variants +x11
-}
+default_variants            +x11
 
 #livecheck.version           ${reasonable_version}
 livecheck.type              regex
