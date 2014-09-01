@@ -7,7 +7,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.8.9-6
+version                     6.8.9-7
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                http://www.imagemagick.org/download/ \
                             ftp://ftp.sunet.se/pub/multimedia/graphics/ImageMagick \
                             ftp://sunsite.icm.edu.pl/packages/ImageMagick
 
-checksums                   sha256  238f8b0f6188ead6b541f88bd8324cc049788662ccd9396ee61caac99d970605
+checksums                   sha256  45670f37ebd3354d64e45df5462b929b5b843dee2b038b0ad524491492bffbf9
 
 depends_lib                 port:bzip2 \
                             port:xz \
@@ -144,13 +144,6 @@ variant lqr description {Support Liquid Rescale (experimental)} {
 variant pango description {Support Pango} {
     depends_lib-append      path:lib/pkgconfig/pango.pc:pango
     configure.args-replace  --without-pango --with-pango
-}
-
-# Legacy perl variant to be removed after May 2014.
-variant perl description {Obsolete variant} {
-    pre-configure {
-        return -code error "The +perl variant is no longer used\; use the separate p5-perlmagick port instead."
-    }
 }
 
 variant rsvg description {Support SVG using librsvg} {
