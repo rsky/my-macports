@@ -7,8 +7,8 @@ PortGroup       github 1.0
 
 name            rabbitmq-c
 categories      net devel
-version         0.5.0
-revision        1
+version         0.5.2
+revision        0
 license         MIT
 maintainers     openmaintainer
 platforms       darwin
@@ -21,8 +21,8 @@ long_description \
    with AMQP servers speaking protocol versions 0-9-1.
 
 checksums \
-    rmd160  85d4bbb5cae9f1855f01efecc1625b7d279082f0 \
-    sha256  72b5b5075d5de834b4eaef1e77d675be2f926206d1ccd2bc886b2deff869f318
+    rmd160  ccff7fd0b3b0e59a5562a4d35b7e12858357309b \
+    sha256  d964f7a7c0a0bf602fb4ba74abdf23f1d064495aadf36b51854fd5b09b4f9887
 
 configure.args  -DBUILD_STATIC_LIBS:BOOL=ON \
                 -DBUILD_TOOLS:BOOL=OFF \
