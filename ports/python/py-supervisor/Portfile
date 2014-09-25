@@ -3,6 +3,7 @@
 
 PortSystem          1.0
 PortGroup           python 1.0
+PortGroup           select 1.0
 
 name                py-supervisor
 version             3.1.2
@@ -29,6 +30,8 @@ python.versions 27
 python.link_binaries_suffix
 
 if {${name} ne ${subport}} {
+    select.group            supervisor
+    select.file             ${filespath}/py${python.version}-supervisor
     depends_build           port:py${python.version}-setuptools
     depends_lib-append      port:py${python.version}-meld3
 
@@ -58,6 +61,8 @@ if {${name} ne ${subport}} {
             ${destroot}${default_conf}
         reinplace "s|%PREFIX%|${prefix}|g" ${destroot}${default_conf}
         reinplace "s|%NAME%|py${python.version}-supervisor|g" ${destroot}${default_conf}
+
+        select::install ${select.group} ${select.file}
     }
 
     post-activate {
