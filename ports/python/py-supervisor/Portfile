@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-supervisor
 version             3.1.2
-revision            0
+revision            1
 categories-append   sysutils
 license             ZPL
 maintainers         openmaintainer
@@ -26,6 +26,7 @@ checksums \
     sha256  cb608b4735522ccd370254bb3b2bea683dc0f6ce723dd8c5b60c600b00b03961
 
 python.versions 27
+python.link_binaries_suffix
 
 if {${name} ne ${subport}} {
     depends_build           port:py${python.version}-setuptools
