@@ -2,29 +2,30 @@
 # $Id$
 
 PortSystem      1.0
+PortGroup       github 1.0
 
 name            leveldb
-version         1.15.0
+categories      databases
+version         1.18
 license         BSD
 maintainers     openmaintainer
 platforms       darwin
 
+github.setup    google ${name} ${version} v
+
 description     A fast and lightweight key/value database library by Google.
 long_description \
-   LevelDB is a fast key-value storage library written at Google \
-   that provides an ordered mapping from string keys to string values.
-
-homepage        http://code.google.com/p/leveldb/
-master_sites    googlecode
+    LevelDB is a fast key-value storage library written at Google \
+    that provides an ordered mapping from string keys to string values.
 
 checksums \
-    rmd160  862b3b2095eb5cf07d1e75e278082847f7ce69ca \
-    sha256  d7c4ec571ef2ee9719f31db06344a1eba495e6abeeac1bc349d0d38a911c6680
+    rmd160  2431505d7d1a08a88b1d10068e571a49dd43a3a0 \
+    sha256  007b554b52fb72877bd0a31c078a9ff67b8a9b8e0f55ff641b77783cfd030a4c
 
 set version_array [split ${version} .]
 set major_version [lindex ${version_array} 0]
 set minor_version [lindex ${version_array} 1]
-set tiny_version  [lindex ${version_array} 2]
+set tiny_version  0
 
 depends_lib     port:snappy
 
@@ -69,7 +70,3 @@ destroot {
         log_format.txt table_format.txt \
         ${docdestroot}/doc
 }
-
-livecheck.type  regex
-livecheck.url   http://code.google.com/p/leveldb/downloads/list
-livecheck.regex {leveldb-([0-9]+\.[0-9]+\.[0-9]+)\.}
