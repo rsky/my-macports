@@ -20,7 +20,7 @@ description         Python Imaging Library (fork)
 long_description    ${description}
 
 homepage            http://github.com/python-imaging/Pillow
-master_sites        http://pypi.python.org/packages/source/P/Pillow/
+master_sites        https://pypi.python.org/packages/source/P/Pillow/
 
 distname            Pillow-${version}
 
@@ -50,6 +50,6 @@ if {${name} ne ${subport}} {
     livecheck.type      none
 } else {
     livecheck.type      regex
-    livecheck.url       ${master_sites}
+    livecheck.url       https://pypi.python.org/pypi/Pillow/json
     livecheck.regex     {Pillow-(\d+(?:\.\d+)*)\.[tz]}
 }
