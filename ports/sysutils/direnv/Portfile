@@ -6,7 +6,7 @@ PortGroup       github 1.0
 
 name            direnv
 categories      sysutils shells
-version         2.5.0
+version         2.6.0
 revision        0
 license         MIT
 maintainers     openmaintainer
@@ -23,8 +23,9 @@ long_description \
    not clutter the \"~/.profile\" file.
 
 checksums \
-    rmd160  a8ea55cd5df401767dd97c965191d81dc6d6afc3 \
-    sha256  8510488e898039468dcfcdfad478828a7a2ef14022fe1ef3a0225929a6762a53
+    rmd160 771ff4a0c68553c95679b9f00ad179ce14e8aed4 \
+    sha256 2794e7b06598ee1302950c8ba836112d441292b8d62d3262e1fd8e6a1027e92d
+
 
 depends_lib     port:go
 
