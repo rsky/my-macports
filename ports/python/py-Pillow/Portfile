@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-Pillow
-version             2.7.0
+version             2.8.1
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        https://pypi.python.org/packages/source/P/Pillow/
 
 distname            Pillow-${version}
 
-checksums           rmd160  3a9f62e4d32a5f518e853c87884a4a9e39e98346 \
-                    sha256  33a5d0145e82326e781ddee1ad375f92cb84f8cfafea56e9504682adff64a5ee
+checksums           rmd160  034bf5ea66ed7482383af5eceaa5e315b874e3cf \
+                    sha256  4363b52527c263e77f5b18c3dfffd15ae454edf0c4457197ecbe29863a651938
 
 if {${name} ne ${subport}} {
     use_zip             yes
