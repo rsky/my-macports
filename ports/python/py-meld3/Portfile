@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-meld3
-version             1.0.0
+version             1.0.2
 revision            0
 categories-append   textproc www
 license             Repoze
@@ -23,8 +23,8 @@ master_sites    http://pypi.python.org/packages/source/m/meld3/ \
                 http://www.plope.com/software/meld3/
 distname        meld3-${version}
 checksums \
-    rmd160  079742bd8829507272c75a78c90e26dd05dc811b \
-    sha256  57b41eebbb5a82d4a928608962616442e239ec6d611fe6f46343e765e36f0b2b
+    rmd160 5d8fc6e2d07e860d04aac7b78e74b87916bf1e77 \
+    sha256 f7b754a0fde7a4429b2ebe49409db240b5699385a572501bb0d5627d299f9558
 
 python.versions 25 26 27 32 33 34
 python.default_version 27
