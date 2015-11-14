@@ -24,5 +24,5 @@ checksums \
     sha256 9729058b358c5159fbe4107007bc38a2b5690d8323ce08a50796b28981048e90
 
 if {${name} ne ${subport}} {
-    depends_build-append    port:libffi
+    depends_lib-append  port:libffi
 }
