@@ -7,7 +7,7 @@ PortGroup                   conflicts_build 1.0
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-version                     6.9.2-4
+version                     6.9.2-6
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,7 +39,7 @@ master_sites                http://www.imagemagick.org/download/ \
                             ftp://ftp.sunet.se/pub/multimedia/graphics/ImageMagick \
                             ftp://sunsite.icm.edu.pl/packages/ImageMagick
 
-checksums                   sha256  05b1c499415048099a1464ebd03f0cfaae8d0994c681bcf7e0319b26e5e8d848
+checksums                   sha256  d7b4e812002c3c26e41579d5a64ff69f43094496ccc1665e314fa122e2f887c7
 
 depends_lib                 port:bzip2 \
                             port:xz \
