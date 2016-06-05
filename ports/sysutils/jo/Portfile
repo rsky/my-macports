@@ -6,14 +6,14 @@ PortGroup       github 1.0
 
 name            jo
 categories      sysutils shells
-version         0.6
+version         1.0
 revision        0
 license         GPL-2+
 maintainers     openmaintainer
 platforms       darwin
 
 set git_author  jpmens
-set git_hash    9bf9f45
+set git_hash    8f550d6
 github.setup    ${git_author} ${name} ${version} v
 
 description     JSON output from a shell
@@ -22,8 +22,9 @@ long_description \
    http://jpmens.net/2016/03/05/a-shell-command-to-create-json-jo/
 
 checksums \
-    rmd160 d9d2bda2d6b868c4d6712ac8e845d04233e09e6a \
-    sha256 0f8d8227b5361232c5d296bd90d5a3eeddd58d27a58b1c3fd68ae935fce7b097
+    rmd160 fc5f83424dd20f5352abff3589b0edc5edf11689 \
+    sha256 fdd5344fe38ab8cbb37a5abd5e74bfc41cab041915d0b09e7f84a414ecd9ee3a \
+
 
 worksrcdir      ${git_author}-${name}-${git_hash}
 
