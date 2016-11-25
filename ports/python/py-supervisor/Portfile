@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-supervisor
-version             3.1.3
+version             3.3.1
 revision            0
 categories-append   sysutils
 license             ZPL
@@ -17,13 +17,11 @@ long_description \
    The supervisor is a client/server system that allows its users \
    to control a number of processes on UNIX-like operating systems
 
-homepage        http://supervisord.org/ \
-                http://pypi.python.org/pypi/supervisor/
-master_sites    http://pypi.python.org/packages/source/s/supervisor/
+homepage        http://supervisord.org/
+master_sites    pypi:s/supervisor/
 distname        supervisor-${version}
-checksums \
-    rmd160  9598b25640e72b0322cbb79a8f8f26712135efba \
-    sha256  e32c546fe8d2a6e079ec4819c49fd24534d4075a58af39118d04367918b3c282
+checksums       rmd160  01f6e5f847b9e4513cd801f78c3e48780832a1d7 \
+                sha256  fc3af22e5a7af2f6c3be787acf055c1c17777f5607cd4dc935fe633ab97061fd
 
 python.versions 27
 python.link_binaries_suffix
