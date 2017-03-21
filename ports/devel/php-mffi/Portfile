@@ -7,9 +7,9 @@ PortGroup       php 1.1
 
 name            php-mffi
 categories      devel
-github.setup    mgdm MFFI a808e7bdab57fb6d73acacf78f587cc0456a16b2
+github.setup    mgdm MFFI 1f7d0f95937829b525d6ccc6f3c27b80611f7af1
 version         0.1.0
-revision        0
+revision        1
 license         MIT
 maintainers     openmaintainer
 php.branches    7.0
@@ -20,8 +20,8 @@ long_description \
     A new foreign-function interface for PHP.
 
 checksums \
-    rmd160 f9beaff0cf0d42388ac9d8ac452edbe99e1f1a5b \
-    sha256 9729058b358c5159fbe4107007bc38a2b5690d8323ce08a50796b28981048e90
+    rmd160 7810578b6009c80f2178fe5e2ceabeab4288e6a2 \
+    sha256 bb0badd101695cf4f55b8663d6dcfcb47cf926eb74e1489d2d982784eee6e6a7
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:libffi
