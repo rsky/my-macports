@@ -34,12 +34,23 @@ def diff(port, category=None, diff_cmd='diff'):
     subprocess.call([diff_cmd, '-u', default_portfile, private_portfile])
 
 
+def find_diff():
+    """find diff command
+    """
+    if sys.stdout.isatty():
+        paths = os.getenv('PATH')
+        for path in paths.split(':'):
+            cmd_path = os.path.join(path, 'colordiff')
+            if os.path.isfile(cmd_path) and os.access(cmd_path, os.X_OK):
+                return 'colordiff'
+
+    return 'diff'
+
+
 def main():
     """main
     """
-    diff_cmd = 'diff'
-    if sys.stdout.isatty():
-        diff_cmd = 'colordiff'
+    diff_cmd = find_diff()
 
     if len(sys.argv) < 2:
         for port in util.find_common_ports():
