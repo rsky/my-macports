@@ -10,7 +10,7 @@ PortGroup                   conflicts_build 1.0
 # PHP Warning:  Version warning: Imagick was compiled against Image Magick version XXXX but version YYYY is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
 
 name                        ImageMagick
-version                     7.0.8-10
+version                     7.0.8-66
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    https://www.imagemagick.org/
 categories                  graphics devel
@@ -42,7 +42,7 @@ master_sites                http://www.imagemagick.org/download/ \
                             ftp://ftp.sunet.se/pub/multimedia/graphics/ImageMagick \
                             ftp://sunsite.icm.edu.pl/packages/ImageMagick
 
-checksums                   sha256  d5309031d59130befa283266011efaab15b1e113f1a218a4ba24c821cd906472
+checksums                   sha256  300fbcf4745a4ca89c2b6f404170502e2e270524d0512523b1449de1f2e76a86
 
 depends_lib                 port:bzip2 \
                             port:xz \
@@ -62,12 +62,6 @@ depends_lib                 port:bzip2 \
 
 # Magick-config etc. use pkg-config
 depends_lib-append          port:pkgconfig
-
-# On case-insensitive filesystems, ImageMagick finds cryptlib's libcl and
-# tries to use it as if it were Apple's OpenCL, which fails; see #23354.
-if {[file exists ${prefix}/lib/libCL.dylib]} {
-    conflicts_build         cryptlib
-}
 
 configure.ccache            no
 
@@ -104,6 +98,17 @@ configure.args              --enable-shared \
                             --without-pango \
                             --without-x \
                             --without-gslib
+
+if {${os.platform} eq "darwin" && ${os.major} < 11} {
+    configure.args-append   --disable-opencl
+} else {
+    configure.args-append   --enable-opencl
+    # On case-insensitive filesystems, ImageMagick finds cryptlib's libcl and
+    # tries to use it as if it were Apple's OpenCL, which fails; see #23354.
+    if {[file exists ${prefix}/lib/libCL.dylib]} {
+        conflicts_build         cryptlib
+    }
+}
 
 test.run                    yes
 test.target                 check
