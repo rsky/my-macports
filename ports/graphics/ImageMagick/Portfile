@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem                  1.0
+PortGroup                   github 1.0
 PortGroup                   conflicts_build 1.0
 
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
@@ -10,13 +11,14 @@ PortGroup                   conflicts_build 1.0
 # PHP Warning:  Version warning: Imagick was compiled against Image Magick version XXXX but version YYYY is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
 
 name                        ImageMagick
-version                     7.0.8-66
+version                     7.0.10-18
+github.setup                ImageMagick ImageMagick ${version}
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    https://www.imagemagick.org/
 categories                  graphics devel
 maintainers                 ryandesign
 license                     Apache-2
-use_xz                      yes
+use_xz                      no
 platforms                   darwin
 use_parallel_build          yes
 
@@ -36,13 +38,12 @@ long_description            ImageMagick is a robust collection of tools and \
                             supported, including GIF, JPEG, JPEG 2000, PNG, PDF, \
                             PhotoCD and TIFF.
 
-master_sites                http://www.imagemagick.org/download/ \
-                            http://mirror.checkdomain.de/imagemagick/ \
-                            ftp://ftp.u-aizu.ac.jp/pub/graphics/image/ImageMagick/imagemagick.org/ \
-                            ftp://ftp.sunet.se/pub/multimedia/graphics/ImageMagick \
-                            ftp://sunsite.icm.edu.pl/packages/ImageMagick
+master_sites                ${github.homepage}/archive
+distname                    ${version}
 
-checksums                   sha256  300fbcf4745a4ca89c2b6f404170502e2e270524d0512523b1449de1f2e76a86
+checksums \
+        rmd160 90e4d5d152757a53c1c27da1d159d2dd51b3c1e1 \
+        sha256 2de0a0fac9590838c63fcacacca473bbeec04b1a8519924c5a360b44fe661edd
 
 depends_lib                 port:bzip2 \
                             port:xz \
