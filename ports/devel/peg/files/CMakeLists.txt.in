@@ -1,8 +1,0 @@
-cmake_minimum_required(VERSION 2.8.8)
-project(peg)
-set(peg_VERSION %VERSION%)
-
-set(peg_BINDIR bin)
-set(peg_MANDIR share/man)
-
-subdirs(src)
