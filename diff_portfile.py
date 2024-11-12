@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """独自のPortfileと標準のPortfileの差分を取る
 """
