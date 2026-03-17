@@ -2,7 +2,7 @@
 
 PortSystem          1.0
 
-name                supervisord
+name                supervisord-startupitem
 version             1.0
 
 categories          devel
@@ -19,15 +19,15 @@ use_configure       no
 build               {}
 destroot            {}
 
-depends_lib         port:py312-supervisor
+depends_lib         port:py313-supervisor
 
 startupitem.create          yes
-startupitem.executable      ${prefix}/bin/supervisord-3.12 -n -c ${prefix}/etc/supervisord.conf
+startupitem.executable      ${prefix}/bin/supervisord-3.13 -n -c ${prefix}/etc/supervisord.conf
 
 livecheck.type      none
 
 notes-append "
     To create a new configuration file, run:
 
-        sudo sh -c '${prefix}/bin/echo_supervisord_conf-3.12 > ${prefix}/etc/supervisord.conf'
+        sudo sh -c '${prefix}/bin/echo_supervisord_conf-3.13 > ${prefix}/etc/supervisord.conf'
 "
