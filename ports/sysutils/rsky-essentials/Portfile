@@ -1,0 +1,69 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+
+name                rsky-essentials
+version             1.0
+
+categories          sysutils
+maintainers         openmaintainer
+license             Apache-2
+
+description         Essential tools for rsky
+long_description    ${description}
+
+distfiles
+use_configure       no
+build               {}
+destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 ${filespath}/dummy.txt ${destroot}${docdir}/dummy.txt
+}
+
+depends_run \
+                    port:brotli \
+                    port:zstd \
+                    \
+                    port:mysql8 \
+                    port:pgFormatter \
+                    port:postgresql18 \
+                    port:sqlite3 \
+                    \
+                    port:cargo \
+                    port:cmake \
+                    port:gh \
+                    port:git \
+                    port:gradle \
+                    port:sqlc \
+                    \
+                    port:neovim \
+                    \
+                    port:ImageMagick7 \
+                    \
+                    port:go \
+                    port:rust \
+                    \
+                    port:claude-code \
+                    port:codex \
+                    port:gemini-cli \
+                    \
+                    port:gnupg2 \
+                    \
+                    port:cloudflared \
+                    port:curl \
+                    port:rclone \
+                    \
+                    port:bash \
+                    port:zsh \
+                    \
+                    port:coreutils \
+                    port:findutils \
+                    port:jq \
+                    port:mise \
+                    port:tree \
+                    port:watch \
+                    \
+                    port:nkf \
+                    port:ripgrep \
+                    port:the_silver_searcher
