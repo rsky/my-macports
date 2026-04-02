@@ -26,7 +26,6 @@ depends_run \
                     port:zstd \
                     \
                     port:mysql8 \
-                    port:pgFormatter \
                     port:postgresql18 \
                     port:sqlite3 \
                     \
