@@ -1,6 +1,4 @@
 /.idea
-/ports/PortIndex
-/ports/PortIndex.quick
 /ports/*/*/work
 .DS_Store
 *.pyc
