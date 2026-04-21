@@ -4,6 +4,7 @@ PortSystem          1.0
 
 name                rsky-essentials
 version             1.0
+epoch               1
 
 categories          sysutils
 maintainers         openmaintainer
@@ -34,6 +35,7 @@ depends_run \
                     port:gh \
                     port:git \
                     port:gradle \
+                    port:py314-awscli2 \
                     port:sqlc \
                     \
                     port:neovim \
