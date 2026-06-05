@@ -3,8 +3,7 @@
 PortSystem          1.0
 
 name                rsky-essentials
-version             1.0
-epoch               1
+version             2026.06.05
 
 categories          sysutils
 maintainers         openmaintainer
@@ -46,8 +45,6 @@ depends_run \
                     port:rust \
                     \
                     port:claude-code \
-                    port:codex \
-                    port:gemini-cli \
                     \
                     port:gnupg2 \
                     \
