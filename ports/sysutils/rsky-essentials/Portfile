@@ -51,6 +51,7 @@ depends_run \
                     port:cloudflared \
                     port:curl \
                     port:rclone \
+                    port:rsync \
                     \
                     port:bash \
                     port:zsh \
