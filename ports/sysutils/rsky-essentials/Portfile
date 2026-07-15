@@ -44,8 +44,6 @@ depends_run \
                     port:go \
                     port:rust \
                     \
-                    port:claude-code \
-                    \
                     port:gnupg2 \
                     \
                     port:cloudflared \
