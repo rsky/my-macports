@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                rsky-essentials
-version             2026.06.05
+version             2026.07.23
 
 categories          sysutils
 maintainers         openmaintainer
@@ -43,6 +43,7 @@ depends_run \
                     \
                     port:go \
                     port:rust \
+                    port:cargo \
                     \
                     port:gnupg2 \
                     \
