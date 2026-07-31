@@ -1,4 +1,5 @@
 php-build-essentials 0
 php-build-libs 389
 supervisord-startupitem 1023
-rsky-essentials 1402
+rsky-php85 1402
+rsky-essentials 2214

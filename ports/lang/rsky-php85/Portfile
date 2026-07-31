@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+
+name                rsky-php85
+version             1.0
+
+categories          lang
+maintainers         openmaintainer \
+                    gmail.com:rsky0711
+homepage            http://localhost
+license             Apache-2
+
+description         All-in-one port for PHP 8.5
+long_description    ${description}
+
+distfiles
+use_configure       no
+build               {}
+destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 ${filespath}/dummy.txt ${destroot}${docdir}/dummy.txt
+}
+
+depends_lib         port:php85 \
+                    port:php85-APCu \
+                    port:php85-curl \
+                    port:php85-exif \
+                    port:php85-ffi \
+                    port:php85-fpm \
+                    port:php85-gd \
+                    port:php85-iconv \
+                    port:php85-igbinary \
+                    port:php85-imagick \
+                    port:php85-intl \
+                    port:php85-mbstring \
+                    port:php85-memcached \
+                    port:php85-mysql \
+                    port:php85-openssl \
+                    port:php85-pcntl \
+                    port:php85-posix \
+                    port:php85-postgresql \
+                    port:php85-psr \
+                    port:php85-redis \
+                    port:php85-sockets \
+                    port:php85-sodium \
+                    port:php85-sqlite \
+                    port:php85-timezonedb \
+                    port:php85-xdebug \
+                    port:php85-xsl \
+                    port:php85-yaml \
+                    port:php85-zip \
+                    port:php85-zstd
