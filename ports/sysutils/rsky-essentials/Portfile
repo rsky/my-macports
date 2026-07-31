@@ -6,7 +6,9 @@ name                rsky-essentials
 version             2026.07.23
 
 categories          sysutils
-maintainers         openmaintainer
+maintainers         openmaintainer \
+                    gmail.com:rsky0711
+homepage            http://localhost
 license             Apache-2
 
 description         Essential tools for rsky
@@ -29,7 +31,6 @@ depends_run \
                     port:postgresql18 \
                     port:sqlite3 \
                     \
-                    port:cargo \
                     port:cmake \
                     port:gh \
                     port:git \

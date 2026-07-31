@@ -6,7 +6,9 @@ name                php-build-essentials
 version             1.0
 
 categories          devel
-maintainers         openmaintainer
+maintainers         openmaintainer \
+                    gmail.com:rsky0711
+homepage            http://localhost
 license             Apache-2
 
 description         Build tools for private build PHP
